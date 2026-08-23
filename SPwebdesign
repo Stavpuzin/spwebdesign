@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>STAV PUZIN — Web Design Studio</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap');
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:#02040b;
+  color:#fff;
+  font-family:Assistant,Arial,sans-serif;
+  overflow-x:hidden;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+
+  background:
+    radial-gradient(
+      circle at 75% 20%,
+      #1645ff28,
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 15% 80%,
+      #00c8ff18,
+      transparent 30%
+    );
+}
+
+
+/* ================= NAV ================= */
+
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+
+  height:78px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 6vw;
+
+  border-bottom:1px solid #ffffff12;
+
+  background:#02040bd9;
+
+  backdrop-filter:blur(20px);
+
+  z-index:100;
+}
+
+
+/* הסמל הקטן בצד ימין */
+
+.mark{
+  width:52px;
+  height:52px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  text-decoration:none;
+
+  border-radius:50%;
+
+  transition:.35s ease;
+
+  filter:
+    drop-shadow(
+      0 0 10px #315cff55
+    );
+}
+
+.mark:hover{
+  transform:
+    rotate(-8deg)
+    scale(1.08);
+
+  filter:
+    drop-shadow(
+      0 0 18px #00a8ff90
+    );
+}
+
+.mark svg{
+  width:46px;
+  height:46px;
+
+  overflow:visible;
+}
+
+.mark-ring{
+  fill:none;
+
+  stroke:url(#markGrad);
+
+  stroke-width:1.2;
+
+  opacity:.55;
+}
+
+.mark-s{
+  fill:none;
+
+  stroke:url(#markGrad);
+
+  stroke-width:3.2;
+
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.mark-orbit{
+  fill:none;
+
+  stroke:#4d75ff;
+
+  stroke-width:1.4;
+
+  stroke-linecap:round;
+
+  opacity:.9;
+}
+
+.mark-dot{
+  fill:#fff;
+
+  filter:
+    drop-shadow(
+      0 0 5px #00d9ff
+    );
+}
+
+
+.nav-links{
+  display:flex;
+
+  gap:30px;
+}
+
+.nav-links a{
+  border:0;
+
+  background:none;
+
+  color:#929db5;
+
+  cursor:pointer;
+
+  font-family:inherit;
+
+  font-size:16px;
+
+  transition:.3s;
+
+  text-decoration:none;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  color:#fff;
+}
+
+
+/* ================= SECTIONS ================= */
+
+section{
+  min-height:100vh;
+
+  padding:
+    130px 8vw
+    80px;
+
+  position:relative;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+}
+
+
+/* ================= HOME ================= */
+
+#home{
+  text-align:center;
+
+  align-items:center;
+}
+
+
+.logo-center{
+  width:
+    min(650px,88vw);
+
+  margin-bottom:38px;
+
+  animation:
+    float 5s ease-in-out infinite;
+
+  z-index:2;
+}
+
+.logo-center img{
+  width:100%;
+
+  display:block;
+
+  border-radius:28px;
+
+  box-shadow:
+    0 0 30px #2862ff70,
+    0 0 100px #2862ff35;
+}
+
+
+@keyframes float{
+
+  0%,100%{
+    transform:
+      translateY(0);
+  }
+
+  50%{
+    transform:
+      translateY(-10px);
+  }
+
+}
+
+
+.eyebrow{
+  font:
+    700 12px
+    "Space Grotesk";
+
+  letter-spacing:4px;
+
+  color:#5d83ff;
+
+  margin-bottom:20px;
+}
+
+
+h1{
+  margin:0;
+
+  font-size:
+    clamp(
+      55px,
+      9vw,
+      125px
+    );
+
+  line-height:.9;
+
+  letter-spacing:-5px;
+
+  max-width:1100px;
+}
+
+
+.gradient{
+
+  background:
+    linear-gradient(
+      90deg,
+      #fff,
+      #4b76ff,
+      #00d9ff,
+      #fff
+    );
+
+  background-size:300%;
+
+  -webkit-background-clip:text;
+
+  color:transparent;
+
+  animation:
+    gradientMove 5s infinite linear;
+}
+
+
+@keyframes gradientMove{
+
+  to{
+    background-position:
+      300%;
+  }
+
+}
+
+
+.lead{
+  color:#aeb7ca;
+
+  max-width:700px;
+
+  font-size:20px;
+
+  line-height:1.7;
+
+  margin:32px 0;
+}
+
+
+.buttons{
+
+  display:flex;
+
+  gap:15px;
+
+  justify-content:center;
+
+  flex-wrap:wrap;
+}
+
+
+.btn{
+
+  padding:
+    16px 28px;
+
+  border-radius:100px;
+
+  text-decoration:none;
+
+  border:
+    1px solid #ffffff18;
+
+  transition:.3s;
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+
+.primary{
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      100deg,
+      #315cff,
+      #00a8ff
+    );
+
+  box-shadow:
+    0 0 35px #315cff40;
+}
+
+
+.primary:hover{
+
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 0 60px #315cff70;
+}
+
+
+.secondary{
+
+  color:#fff;
+
+  background:#ffffff08;
+}
+
+
+.secondary:hover{
+
+  background:#ffffff13;
+}
+
+
+/* ================= GLOW ================= */
+
+.orb{
+
+  position:absolute;
+
+  border-radius:50%;
+
+  pointer-events:none;
+}
+
+
+.orb1{
+
+  width:450px;
+  height:450px;
+
+  right:-200px;
+  top:150px;
+
+  background:#2148ff20;
+
+  box-shadow:
+    0 0 180px #2148ff35;
+}
+
+
+.orb2{
+
+  width:250px;
+  height:250px;
+
+  left:-80px;
+  bottom:100px;
+
+  background:#00d9ff15;
+
+  box-shadow:
+    0 0 120px #00d9ff30;
+}
+
+
+/* ================= TICKER ================= */
+
+.ticker{
+
+  position:absolute;
+
+  bottom:0;
+
+  left:0;
+
+  width:100%;
+
+  overflow:hidden;
+
+  border-top:
+    1px solid #ffffff10;
+
+  border-bottom:
+    1px solid #ffffff10;
+
+  padding:15px 0;
+
+  color:#52648f;
+
+  white-space:nowrap;
+
+  font:
+    700 13px
+    "Space Grotesk";
+}
+
+
+.ticker div{
+
+  display:inline-block;
+
+  animation:
+    moveText 20s linear infinite;
+}
+
+
+@keyframes moveText{
+
+  from{
+    transform:
+      translateX(0);
+  }
+
+  to{
+    transform:
+      translateX(50%);
+  }
+
+}
+
+
+/* ================= SERVICES ================= */
+
+.section-title{
+
+  margin-bottom:50px;
+}
+
+
+.section-title h2{
+
+  font-size:
+    clamp(
+      50px,
+      8vw,
+      100px
+    );
+
+  line-height:.9;
+
+  margin:0;
+
+  letter-spacing:-4px;
+}
+
+
+.cards{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:20px;
+
+  max-width:1150px;
+
+  width:100%;
+}
+
+
+.card{
+
+  min-height:310px;
+
+  padding:35px;
+
+  border:
+    1px solid #ffffff15;
+
+  border-radius:25px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff0b,
+      #ffffff02
+    );
+
+  transition:.4s;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+
+.card:hover{
+
+  transform:
+    translateY(-10px);
+
+  border-color:
+    #4673ff80;
+
+  box-shadow:
+    0 25px 80px #0009;
+}
+
+
+.number{
+
+  color:#5279ff;
+
+  font:
+    600 14px
+    "Space Grotesk";
+}
+
+
+.card h3{
+
+  font-size:32px;
+
+  margin-top:65px;
+
+  margin-bottom:12px;
+}
+
+
+.card p{
+
+  color:#aeb7ca;
+
+  line-height:1.7;
+
+  font-size:17px;
+}
+
+
+.tag{
+
+  color:#4c70bd;
+
+  font:
+    10px
+    "Space Grotesk";
+
+  letter-spacing:3px;
+}
+
+
+/* ================= CONTACT ================= */
+
+.contact-content{
+
+  max-width:1100px;
+
+  width:100%;
+}
+
+
+.contact-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:18px;
+
+  margin-top:35px;
+}
+
+
+.contact-card{
+
+  padding:30px;
+
+  border:
+    1px solid #ffffff15;
+
+  border-radius:24px;
+
+  background:#ffffff06;
+
+  text-decoration:none;
+
+  color:#fff;
+
+  transition:.35s;
+}
+
+
+.contact-card:hover{
+
+  transform:
+    translateY(-8px);
+
+  border-color:
+    #4b76ff90;
+
+  box-shadow:
+    0 20px 60px #0008;
+}
+
+
+.contact-card small{
+
+  display:block;
+
+  color:#557bff;
+
+  font:
+    700 11px
+    "Space Grotesk";
+
+  letter-spacing:3px;
+
+  margin-bottom:15px;
+}
+
+
+.contact-card strong{
+
+  display:block;
+
+  font-size:22px;
+
+  margin-bottom:12px;
+}
+
+
+.contact-card span{
+
+  color:#8794ae;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+  .nav{
+
+    padding:
+      0 5vw;
+  }
+
+
+  .nav-links{
+
+    gap:12px;
+  }
+
+
+  .nav-links a{
+
+    font-size:13px;
+  }
+
+
+  .mark{
+
+    width:44px;
+    height:44px;
+  }
+
+
+  .mark svg{
+
+    width:40px;
+    height:40px;
+  }
+
+
+  section{
+
+    padding:
+      115px 6vw
+      70px;
+  }
+
+
+  h1{
+
+    font-size:58px;
+
+    letter-spacing:-3px;
+  }
+
+
+  .lead{
+
+    font-size:18px;
+  }
+
+
+  .cards,
+  .contact-grid{
+
+    grid-template-columns:1fr;
+  }
+
+
+  .logo-center{
+
+    width:90vw;
+  }
+
+
+  .section-title h2{
+
+    font-size:58px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<header class="nav">
+
+  <!-- הסמל הקטן למעלה -->
+
+  <a
+    href="#home"
+    class="mark"
+    aria-label="STAV PUZIN"
+  >
+
+    <svg
+      viewBox="0 0 64 64"
+      aria-hidden="true"
+    >
+
+      <defs>
+
+        <linearGradient
+          id="markGrad"
+          x1="8"
+          y1="8"
+          x2="56"
+          y2="56"
+        >
+
+          <stop
+            offset="0%"
+            stop-color="#ffffff"
+          />
+
+          <stop
+            offset="45%"
+            stop-color="#4d75ff"
+          />
+
+          <stop
+            offset="100%"
+            stop-color="#00d9ff"
+          />
+
+        </linearGradient>
+
+      </defs>
+
+
+      <circle
+        class="mark-ring"
+        cx="32"
+        cy="32"
+        r="23"
+      />
+
+
+      <path
+        class="mark-s"
+        d="M42 21c-3-4-7-6-12-6-7 0-12 4-12 9 0 6 5 8 13 10 7 2 11 4 11 9 0 5-5 9-12 9-6 0-11-2-14-7"
+      />
+
+
+      <path
+        class="mark-orbit"
+        d="M8 38c8-13 23-21 40-18 4 1 7 2 9 4"
+      />
+
+
+      <circle
+        class="mark-dot"
+        cx="53"
+        cy="21"
+        r="2.5"
+      />
+
+    </svg>
+
+  </a>
+
+
+  <nav class="nav-links">
+
+    <a
+      class="active"
+      href="#home"
+    >
+      ראשי
+    </a>
+
+
+    <a href="#services">
+      השירותים
+    </a>
+
+
+    <a href="#contact">
+      יצירת קשר
+    </a>
+
+  </nav>
+
+</header>
+
+
+
+<!-- ================= HOME ================= -->
+
+<section id="home">
+
+  <div class="orb orb1"></div>
+
+  <div class="orb orb2"></div>
+
+
+  <!-- הלוגו הגדול -->
+
+  <div class="logo-center">
+
+    <img
+      src="logo.jpeg"
+      alt="STAV PUZIN WEB DESIGN STUDIO"
+    >
+
+  </div>
+
+
+  <div class="eyebrow">
+
+    WEB DESIGN • DEVELOPMENT • BRAND
+
+  </div>
+
+
+  <h1>
+
+    האתר שיגרום ללקוחות
+
+    <br>
+
+    <span class="gradient">
+
+      לבחור דווקא בעסק שלך.
+
+    </span>
+
+  </h1>
+
+
+  <p class="lead">
+
+    דפי נחיתה ואתרים לנשים ולגברים,
+    לעצמאים ולעסקים שרוצים להיראות מקצועיים,
+    למשוך תשומת לב ולהפוך גולשים ללקוחות.
+
+  </p>
+
+
+  <div class="buttons">
+
+    <a
+      class="btn primary"
+      href="#contact"
+    >
+      בואו נבנה לכם אתר
+    </a>
+
+
+    <a
+      class="btn secondary"
+      href="#services"
+    >
+      לראות מה אני מציעה ↓
+    </a>
+
+  </div>
+
+
+  <div class="ticker">
+
+    <div>
+
+      DESIGN • MOTION • CONVERSION •
+
+      DESIGN • MOTION • CONVERSION •
+
+      DESIGN • MOTION • CONVERSION •
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= SERVICES ================= -->
+
+<section id="services">
+
+
+  <div class="section-title">
+
+    <div class="eyebrow">
+
+      WHAT I BUILD
+
+    </div>
+
+
+    <h2>
+
+      לא עוד אתר.
+
+      <br>
+
+      <span class="gradient">
+
+        חוויה.
+
+      </span>
+
+    </h2>
+
+  </div>
+
+
+
+  <div class="cards">
+
+
+    <article class="card">
+
+      <div class="number">
+
+        01
+
+      </div>
+
+
+      <h3>
+
+        דף נחיתה
+
+      </h3>
+
+
+      <p>
+
+        עמוד חד ומדויק שמציג את העסק שלך
+        ומוביל את המבקר לפעולה.
+
+      </p>
+
+
+      <div class="tag">
+
+        LANDING PAGE
+
+      </div>
+
+    </article>
+
+
+
+    <article class="card">
+
+      <div class="number">
+
+        02
+
+      </div>
+
+
+      <h3>
+
+        אתר תדמית
+
+      </h3>
+
+
+      <p>
+
+        נוכחות דיגיטלית מלאה עם עיצוב ייחודי,
+        תוכן ברור וחוויית משתמש.
+
+      </p>
+
+
+      <div class="tag">
+
+        BUSINESS WEBSITE
+
+      </div>
+
+    </article>
+
+
+
+    <article class="card">
+
+      <div class="number">
+
+        03
+
+      </div>
+
+
+      <h3>
+
+        עיצוב אישי
+
+      </h3>
+
+
+      <p>
+
+        צבעים, אנימציות, טיפוגרפיה ואווירה
+        שנבנים במיוחד עבור המותג שלך.
+
+      </p>
+
+
+      <div class="tag">
+
+        CREATIVE DESIGN
+
+      </div>
+
+    </article>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact">
+
+
+  <div class="contact-content">
+
+
+    <div class="eyebrow">
+
+      LET'S TALK
+
+    </div>
+
+
+    <h1>
+
+      יש לך רעיון?
+
+      <br>
+
+      <span class="gradient">
+
+        בואו נבנה אותו.
+
+      </span>
+
+    </h1>
+
+
+    <p class="lead">
+
+      שלחו הודעה ונחזור אליכם כדי להבין
+      מה העסק שלכם צריך ולבנות עבורכם
+      אתר שמתאים בדיוק לכם.
+
+    </p>
+
+
+
+    <div class="contact-grid">
+
+
+      <!-- PHONE -->
+
+      <a
+        class="contact-card"
+        href="tel:0549815445"
+      >
+
+        <small>
+
+          PHONE
+
+        </small>
+
+
+        <strong>
+
+          0549815445
+
+        </strong>
+
+
+        <span>
+
+          להתקשר ↗
+
+        </span>
+
+      </a>
+
+
+
+      <!-- EMAIL -->
+
+      <a
+        class="contact-card"
+        href="mailto:Stavpuzin@gmail.com"
+      >
+
+        <small>
+
+          EMAIL
+
+        </small>
+
+
+        <strong>
+
+          Stavpuzin@gmail.com
+
+        </strong>
+
+
+        <span>
+
+          לשלוח מייל ↗
+
+        </span>
+
+      </a>
+
+
+
+      <!-- FACEBOOK -->
+
+      <a
+        class="contact-card"
+        href="https://www.facebook.com/share/1B2YhJr8SM/?mibextid=wwXIfr"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <small>
+
+          FACEBOOK
+
+        </small>
+
+
+        <strong>
+
+          Facebook
+
+        </strong>
+
+
+        <span>
+
+          לעמוד בפייסבוק ↗
+
+        </span>
+
+      </a>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<script>
+
+const sections =
+  document.querySelectorAll("section");
+
+const navLinks =
+  document.querySelectorAll(".nav-links a");
+
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    let current = "home";
+
+
+    sections.forEach(
+      section => {
+
+        if(
+          window.scrollY >=
+          section.offsetTop - 220
+        ){
+
+          current =
+            section.id;
+
+        }
+
+      }
+    );
+
+
+    navLinks.forEach(
+      link => {
+
+        link.classList.toggle(
+          "active",
+          link.getAttribute("href") ===
+          "#" + current
+        );
+
+      }
+    );
+
+  }
+);
+
+</script>
+
+
+</body>
+
+</html>
