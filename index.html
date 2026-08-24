@@ -2,1359 +2,525 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>STAV PUZIN — Web Design Studio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stav Puzin — Web Design Studio</title>
 
 <style>
-*{box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-body{
-  margin:0;
-  background:#000;
-  color:#fff;
-  font-family:Arial,"Heebo",sans-serif;
-  overflow-x:hidden;
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    background: #000;
 }
 
-/* ===== GOLD BACKGROUND ===== */
-
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-2;
-
-  background:
-    radial-gradient(
-      circle at 75% 20%,
-      rgba(220,175,75,.13),
-      transparent 25%
-    ),
-    radial-gradient(
-      circle at 10% 80%,
-      rgba(220,175,75,.08),
-      transparent 30%
-    ),
-    #000;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
 }
 
-/* ===== GOLD LIGHT ===== */
+/* =====================================================
+   PAGES
+===================================================== */
 
-.light{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:1000;
-  overflow:hidden;
+.page {
+    display: none;
+
+    position: relative;
+
+    width: 100vw;
+    min-height: 100vh;
+
+    background: #000;
+
+    overflow: hidden;
 }
 
-.light:after{
-  content:"";
-
-  position:absolute;
-  top:-20%;
-  left:-30%;
-
-  width:18%;
-  height:140%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,220,140,.10),
-      transparent
-    );
-
-  transform:skewX(-18deg);
-
-  animation:
-    lightMove 9s ease-in-out infinite;
+.page.active {
+    display: block;
 }
 
-@keyframes lightMove{
+/*
+   הסקיצה עצמה משמשת כרקע של העמוד,
+   ולכן המראה נשמר בדיוק כמו התמונה.
+*/
 
-  0%,65%{
-    left:-30%;
-    opacity:0;
-  }
+.page-image {
+    display: block;
 
-  72%{
-    opacity:1;
-  }
+    width: 100vw;
+    height: 100vh;
 
-  92%,100%{
-    left:120%;
-    opacity:0;
-  }
+    object-fit: contain;
+    object-position: center center;
+
+    background: #000;
 }
 
-/* ===== NAVIGATION ===== */
+/* =====================================================
+   INVISIBLE CLICK AREAS
+===================================================== */
 
-header{
-  position:sticky;
-  top:0;
-  z-index:500;
+.hotspot {
+    position: absolute;
 
-  height:76px;
+    z-index: 100;
 
-  background:
-    rgba(0,0,0,.92);
+    display: block;
 
-  backdrop-filter:blur(15px);
+    border: none;
 
-  border-bottom:
-    1px solid
-    rgba(220,175,75,.35);
+    background: transparent;
+
+    cursor: pointer;
+
+    text-decoration: none;
 }
 
-nav{
-  width:min(1180px,92%);
-  height:100%;
+/* =====================================================
+   TOP NAVIGATION
+===================================================== */
 
-  margin:auto;
+.nav-home {
+    left: 54%;
+    top: 1%;
 
-  display:flex;
-  align-items:center;
-
-  gap:42px;
+    width: 11%;
+    height: 10%;
 }
 
-nav a{
-  height:100%;
+.nav-services {
+    left: 43%;
+    top: 1%;
 
-  display:flex;
-  align-items:center;
-
-  position:relative;
-
-  color:#d8d2c9;
-
-  text-decoration:none;
-
-  font-size:16px;
-
-  transition:.3s;
+    width: 12%;
+    height: 10%;
 }
 
-nav a:hover,
-nav a.active{
-  color:#eac36b;
+.nav-process {
+    left: 30%;
+    top: 1%;
+
+    width: 14%;
+    height: 10%;
 }
 
-nav a.active:after{
-  content:"";
+.nav-about {
+    left: 20%;
+    top: 1%;
 
-  position:absolute;
-
-  bottom:0;
-  left:0;
-  right:0;
-
-  height:2px;
-
-  background:#eac36b;
-
-  box-shadow:
-    0 0 14px #eac36b;
+    width: 10%;
+    height: 10%;
 }
 
-.logo{
-  margin-right:auto;
+.nav-contact {
+    left: 6%;
+    top: 1%;
 
-  font-family:Georgia,serif;
-
-  font-size:46px;
-
-  letter-spacing:-8px;
-
-  color:#aaa;
-
-  text-shadow:
-    0 0 15px
-    rgba(255,220,140,.15);
+    width: 14%;
+    height: 10%;
 }
 
-/* ===== SECTIONS ===== */
+/* =====================================================
+   HOME BUTTONS
+===================================================== */
 
-section{
-  width:min(1180px,92%);
+.home-contact {
+    left: 9%;
+    top: 70%;
 
-  min-height:100vh;
-
-  margin:auto;
-
-  padding:
-    100px 0;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    width: 22%;
+    height: 12%;
 }
 
-/* ===== HERO ===== */
+.home-services {
+    left: 31%;
+    top: 70%;
 
-.hero{
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:40px;
-
-  align-items:center;
+    width: 22%;
+    height: 12%;
 }
 
-.eyebrow{
-  color:#d9ae55;
+/* =====================================================
+   CONTACT BUTTONS
+===================================================== */
 
-  letter-spacing:3px;
+.contact-phone {
+    left: 76%;
+    top: 20%;
 
-  font-size:14px;
-
-  margin-bottom:20px;
+    width: 17%;
+    height: 34%;
 }
 
-h1{
-  margin:0;
+.contact-email {
+    left: 57%;
+    top: 20%;
 
-  font-size:
-    clamp(45px,5vw,76px);
-
-  line-height:1.05;
-
-  font-weight:400;
+    width: 17%;
+    height: 34%;
 }
 
-h1 span{
-  color:#d6a84d;
+.contact-facebook {
+    left: 38%;
+    top: 20%;
+
+    width: 17%;
+    height: 34%;
 }
 
-.hero-text p{
-  color:#c8c1b8;
+/* =====================================================
+   MOBILE
+===================================================== */
 
-  font-size:19px;
+@media (max-width: 700px) {
 
-  line-height:1.8;
+    .page {
+        min-height: 0;
 
-  max-width:590px;
+        width: 100vw;
 
-  margin:
-    30px 0;
+        height: calc(100vw * 768 / 1206);
+    }
+
+    .page-image {
+        width: 100vw;
+
+        height: calc(100vw * 768 / 1206);
+
+        min-height: 0;
+
+        object-fit: fill;
+    }
+
+    .nav-home {
+        left: 54%;
+        top: 1%;
+        width: 11%;
+        height: 11%;
+    }
+
+    .nav-services {
+        left: 43%;
+        top: 1%;
+        width: 12%;
+        height: 11%;
+    }
+
+    .nav-process {
+        left: 30%;
+        top: 1%;
+        width: 14%;
+        height: 11%;
+    }
+
+    .nav-about {
+        left: 20%;
+        top: 1%;
+        width: 10%;
+        height: 11%;
+    }
+
+    .nav-contact {
+        left: 6%;
+        top: 1%;
+        width: 14%;
+        height: 11%;
+    }
 }
 
-.divider{
-  width:270px;
-
-  height:1px;
-
-  margin:
-    25px auto;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #d8ad57,
-      transparent
-    );
-
-  position:relative;
-}
-
-.divider:after{
-  content:"✦";
-
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  transform:
-    translate(-50%,-50%);
-
-  background:#000;
-
-  color:#eac36b;
-
-  padding:0 10px;
-}
-
-/* ===== BUTTONS ===== */
-
-.buttons{
-  display:flex;
-
-  gap:15px;
-
-  flex-wrap:wrap;
-}
-
-.btn{
-  display:inline-flex;
-
-  align-items:center;
-  justify-content:center;
-
-  min-width:185px;
-
-  padding:
-    15px 24px;
-
-  border-radius:5px;
-
-  border:
-    1px solid
-    #8d672b;
-
-  color:#e9c16b;
-
-  background:#050505;
-
-  transition:.3s;
-}
-
-.btn:hover{
-  transform:translateY(-4px);
-
-  box-shadow:
-    0 10px 30px
-    rgba(220,175,75,.15);
-}
-
-.btn.gold{
-  color:#080808;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ad7e2d,
-      #efc96d
-    );
-}
-
-/* ===== SP HERO ===== */
-
-.hero-logo{
-  position:relative;
-
-  min-height:500px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-}
-
-.big-sp{
-  font-family:Georgia,serif;
-
-  font-size:
-    clamp(190px,25vw,350px);
-
-  line-height:.65;
-
-  color:#101010;
-
-  -webkit-text-stroke:
-    1px #8e8b84;
-
-  text-shadow:
-    0 0 35px
-    rgba(255,220,140,.12);
-}
-
-.laptop{
-  position:absolute;
-
-  width:270px;
-  height:180px;
-
-  bottom:70px;
-  right:12%;
-
-  background:
-    linear-gradient(
-      135deg,
-      #080808,
-      #29251d
-    );
-
-  border:
-    2px solid
-    #666158;
-
-  border-radius:8px;
-
-  transform:
-    rotate(-10deg);
-
-  box-shadow:
-    0 25px 50px #000;
-}
-
-.laptop:after{
-  content:"";
-
-  position:absolute;
-
-  left:-25px;
-  right:-25px;
-  bottom:-18px;
-
-  height:18px;
-
-  background:#151515;
-
-  border:
-    2px solid
-    #666158;
-
-  border-radius:
-    0 0 12px 12px;
-}
-
-.apple{
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  transform:
-    translate(-50%,-50%);
-
-  font-size:35px;
-
-  color:#d8c291;
-}
-
-/* ===== SERVICES ===== */
-
-.section-title{
-  width:100%;
-
-  text-align:center;
-
-  color:#e3b661;
-
-  font-size:43px;
-
-  font-weight:400;
-
-  margin:0;
-}
-
-.cards{
-  width:100%;
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:22px;
-
-  margin-top:50px;
-}
-
-.card{
-  position:relative;
-
-  min-height:330px;
-
-  padding:35px 28px;
-
-  text-align:center;
-
-  border:
-    1px solid
-    rgba(210,163,70,.5);
-
-  border-radius:15px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(10,10,10,.95),
-      rgba(2,2,2,.8)
-    );
-
-  transition:.4s;
-
-  overflow:hidden;
-}
-
-.card:hover{
-  transform:
-    translateY(-10px);
-
-  border-color:#eac36b;
-
-  box-shadow:
-    0 20px 45px
-    rgba(0,0,0,.7),
-    0 0 25px
-    rgba(220,175,75,.12);
-}
-
-.icon{
-  width:78px;
-  height:78px;
-
-  margin:
-    0 auto 25px;
-
-  border:
-    1px solid
-    #a67b32;
-
-  border-radius:50%;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  color:#eac36b;
-
-  font-size:32px;
-}
-
-.card h3{
-  font-size:27px;
-
-  font-weight:400;
-
-  margin:
-    0 0 15px;
-}
-
-.card p{
-  color:#c5beb5;
-
-  line-height:1.8;
-
-  font-size:16px;
-}
-
-.number{
-  position:absolute;
-
-  bottom:18px;
-  left:22px;
-
-  color:#b68a43;
-
-  font-size:16px;
-}
-
-/* ===== PROCESS ===== */
-
-.process{
-  width:100%;
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:10px;
-
-  margin-top:55px;
-}
-
-.step{
-  text-align:center;
-
-  position:relative;
-}
-
-.step-icon{
-  width:84px;
-  height:84px;
-
-  margin:auto;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  border:
-    1px solid
-    #e0b75c;
-
-  border-radius:50%;
-
-  background:#000;
-
-  color:#eac36b;
-
-  font-size:30px;
-
-  position:relative;
-
-  z-index:2;
-}
-
-.step:not(:last-child):after{
-  content:"";
-
-  position:absolute;
-
-  top:42px;
-
-  left:-50%;
-
-  width:100%;
-
-  height:1px;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #d7a947,
-      transparent
-    );
-}
-
-.step-number{
-  color:#e5b95d;
-
-  margin-top:14px;
-
-  font-size:18px;
-}
-
-.step h3{
-  font-size:22px;
-
-  font-weight:400;
-}
-
-.step p{
-  color:#bfb8ae;
-
-  line-height:1.7;
-
-  max-width:190px;
-
-  margin:auto;
-}
-
-/* ===== CONTACT ===== */
-
-.contact-box{
-  width:100%;
-
-  padding:40px;
-
-  border:
-    1px solid
-    rgba(210,163,70,.55);
-
-  border-radius:16px;
-
-  background:
-    rgba(5,5,5,.8);
-
-  display:grid;
-
-  grid-template-columns:
-    1fr 2fr;
-
-  gap:30px;
-
-  align-items:center;
-}
-
-.contact-text h2{
-  color:#e3b661;
-
-  font-size:43px;
-
-  font-weight:400;
-
-  margin:0 0 10px;
-}
-
-.contact-text p{
-  color:#c8c1b8;
-
-  font-size:17px;
-
-  line-height:1.8;
-}
-
-.contact-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:15px;
-}
-
-.contact-card{
-  min-height:155px;
-
-  border:
-    1px solid
-    rgba(178,133,52,.5);
-
-  border-radius:10px;
-
-  padding:22px 10px;
-
-  text-align:center;
-
-  transition:.3s;
-}
-
-.contact-card:hover{
-  transform:
-    translateY(-5px);
-
-  border-color:#eac36b;
-}
-
-.contact-icon{
-  font-size:30px;
-
-  color:#eac36b;
-
-  margin-bottom:12px;
-}
-
-.contact-card strong{
-  display:block;
-
-  font-size:16px;
-
-  margin-bottom:8px;
-}
-
-.contact-card span{
-  color:#bcb5ab;
-
-  font-size:14px;
-}
-
-/* ===== FOOTER ===== */
-
-footer{
-  text-align:center;
-
-  padding:
-    80px 0 60px;
-}
-
-.footer-sp{
-  font-family:Georgia,serif;
-
-  font-size:115px;
-
-  line-height:.7;
-
-  color:#111;
-
-  -webkit-text-stroke:
-    1px #888;
-}
-
-.footer-name{
-  font-family:Georgia,serif;
-
-  font-size:43px;
-
-  letter-spacing:6px;
-
-  color:#aaa;
-}
-
-.footer-sub{
-  margin-top:15px;
-
-  color:#d6ad5a;
-
-  letter-spacing:5px;
-
-  font-size:13px;
-}
-
-/* ===== REVEAL ===== */
-
-.reveal{
-  opacity:0;
-
-  transform:
-    translateY(25px);
-
-  transition:
-    opacity .8s ease,
-    transform .8s ease;
-}
-
-.reveal.show{
-  opacity:1;
-
-  transform:
-    translateY(0);
-}
-
-/* ===== MOBILE ===== */
-
-@media(max-width:850px){
-
-  nav{
-    gap:18px;
-  }
-
-  nav a{
-    font-size:13px;
-  }
-
-  .hero{
-    grid-template-columns:1fr;
-
-    text-align:center;
-  }
-
-  .hero-text p{
-    margin-left:auto;
-    margin-right:auto;
-  }
-
-  .buttons{
-    justify-content:center;
-  }
-
-  .hero-logo{
-    min-height:360px;
-  }
-
-  .cards{
-    grid-template-columns:1fr;
-  }
-
-  .process{
-    grid-template-columns:
-      1fr 1fr;
-
-    gap:40px 10px;
-  }
-
-  .step:not(:last-child):after{
-    display:none;
-  }
-
-  .contact-box{
-    grid-template-columns:1fr;
-
-    text-align:center;
-  }
-
-  .contact-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:560px){
-
-  nav{
-    width:96%;
-
-    gap:12px;
-  }
-
-  nav a:nth-child(2),
-  nav a:nth-child(3){
-    display:none;
-  }
-
-  .logo{
-    font-size:35px;
-  }
-
-  section{
-    width:94%;
-
-    padding:
-      70px 0;
-  }
-
-  h1{
-    font-size:43px;
-  }
-
-  .process{
-    grid-template-columns:1fr;
-  }
-
-  .footer-name{
-    font-size:30px;
-  }
-}
 </style>
 </head>
 
+
 <body>
 
-<div class="light"></div>
 
-<header>
-<nav>
+<!-- =====================================================
+     PAGE 1
+     התמונה הראשונה ששלחת
+     ראשי
+===================================================== -->
 
-<a href="#home" class="active">
-ראשי
-</a>
-
-<a href="#services">
-שירותים
-</a>
-
-<a href="#process">
-תהליך עבודה
-</a>
-
-<a href="#about">
-אודות
-</a>
-
-<a href="#contact">
-יצירת קשר
-</a>
-
-<div class="logo">
-SP
-</div>
-
-</nav>
-</header>
-
-
-<!-- ================= HOME ================= -->
-
-<section id="home">
-
-<div class="hero">
-
-<div class="hero-text reveal">
-
-<div class="eyebrow">
-WEB DESIGN • DEVELOPMENT • BRAND
-</div>
-
-<h1>
-האתר שיגרום ללקוחות
-<br>
-<span>
-לבחור דווקא בעסק שלך.
-</span>
-</h1>
-
-<div class="divider"></div>
-
-<p>
-דפי נחיתה ואתרים מעוצבים,
-מקצועיים ומדויקים שמביאים תוצאות,
-בונים אמון ומייצרים לקוחות.
-</p>
-
-<div class="buttons">
-
-<a
-href="#contact"
-class="btn gold"
+<section
+    id="home"
+    class="page active"
 >
-בואו נבנה לכם אתר ✦
-</a>
 
-<a
-href="#services"
-class="btn"
->
-לצפייה בעבודות שלנו ↓
-</a>
-
-</div>
-
-</div>
+    <img
+        src="page1.jpg"
+        class="page-image"
+        alt="Stav Puzin - ראשי"
+    >
 
 
-<div class="hero-logo reveal">
+    <!-- תפריט -->
 
-<div class="big-sp">
-SP
-</div>
+    <a
+        href="#home"
+        class="hotspot nav-home"
+        aria-label="ראשי"
+    ></a>
 
-<div class="laptop">
 
-<div class="apple">
-●
-</div>
+    <a
+        href="#services"
+        class="hotspot nav-services"
+        aria-label="שירותים"
+    ></a>
 
-</div>
 
-</div>
+    <a
+        href="#process"
+        class="hotspot nav-process"
+        aria-label="תהליך עבודה"
+    ></a>
 
-</div>
+
+    <a
+        href="#home"
+        class="hotspot nav-about"
+        aria-label="אודות"
+    ></a>
+
+
+    <a
+        href="#contact"
+        class="hotspot nav-contact"
+        aria-label="יצירת קשר"
+    ></a>
+
+
+    <!-- כפתור בואו נבנה לכם אתר -->
+
+    <a
+        href="#contact"
+        class="hotspot home-contact"
+        aria-label="בואו נבנה לכם אתר"
+    ></a>
+
+
+    <!-- כפתור עבודות -->
+
+    <a
+        href="#services"
+        class="hotspot home-services"
+        aria-label="לצפייה בעבודות שלנו"
+    ></a>
 
 </section>
 
 
 
-<!-- ================= SERVICES ================= -->
+<!-- =====================================================
+     PAGE 2
+     התמונה השנייה ששלחת
+     שירותים
+===================================================== -->
 
-<section id="services">
+<section
+    id="services"
+    class="page"
+>
 
-<div style="width:100%">
-
-<h2 class="section-title reveal">
-השירותים שלי
-</h2>
-
-<div class="divider"></div>
-
-<div class="cards">
-
-<div class="card reveal">
-
-<div class="icon">
-🚀
-</div>
-
-<h3>
-דף נחיתה
-</h3>
-
-<p>
-דף נחיתה ממוקד שמוביל
-את הגולש לפעולה ברורה,
-להשאיר פרטים ולקנות.
-</p>
-
-<div class="number">
-01
-</div>
-
-</div>
+    <img
+        src="page2.jpg"
+        class="page-image"
+        alt="Stav Puzin - שירותים"
+    >
 
 
-<div class="card reveal">
+    <!-- תפריט -->
 
-<div class="icon">
-▣
-</div>
-
-<h3>
-אתר תדמית
-</h3>
-
-<p>
-אתר תדמית מקצועי שמציג
-את העסק שלך בצורה הטובה
-ביותר ברשת.
-</p>
-
-<div class="number">
-02
-</div>
-
-</div>
+    <a
+        href="#home"
+        class="hotspot nav-home"
+        aria-label="ראשי"
+    ></a>
 
 
-<div class="card reveal">
+    <a
+        href="#services"
+        class="hotspot nav-services"
+        aria-label="שירותים"
+    ></a>
 
-<div class="icon">
-✎
-</div>
 
-<h3>
-עיצוב אישי
-</h3>
+    <a
+        href="#process"
+        class="hotspot nav-process"
+        aria-label="תהליך עבודה"
+    ></a>
 
-<p>
-עיצוב ייחודי ומדויק למותג שלך,
-עם דגש על חוויית משתמש
-וקונספט יוקרתי.
-</p>
 
-<div class="number">
-03
-</div>
+    <a
+        href="#home"
+        class="hotspot nav-about"
+        aria-label="אודות"
+    ></a>
 
-</div>
 
-</div>
-
-</div>
+    <a
+        href="#contact"
+        class="hotspot nav-contact"
+        aria-label="יצירת קשר"
+    ></a>
 
 </section>
 
 
 
-<!-- ================= PROCESS ================= -->
+<!-- =====================================================
+     PAGE 3
+     התמונה השלישית ששלחת
+     תהליך עבודה
+===================================================== -->
 
-<section id="process">
+<section
+    id="process"
+    class="page"
+>
 
-<div style="width:100%">
-
-<h2 class="section-title reveal">
-תהליך העבודה
-</h2>
-
-<div class="divider"></div>
-
-<div class="process">
-
-<div class="step reveal">
-
-<div class="step-icon">
-♧
-</div>
-
-<div class="step-number">
-01
-</div>
-
-<h3>
-מכירים
-</h3>
-
-<p>
-מכירים את העסק,
-הקהל והצרכים שלך.
-</p>
-
-</div>
+    <img
+        src="page3.jpg"
+        class="page-image"
+        alt="Stav Puzin - תהליך עבודה"
+    >
 
 
-<div class="step reveal">
+    <!-- תפריט -->
 
-<div class="step-icon">
-✎
-</div>
-
-<div class="step-number">
-02
-</div>
-
-<h3>
-מתכננים
-</h3>
-
-<p>
-יוצרים אסטרטגיה,
-מבנה ותוכן מדויק לאתר.
-</p>
-
-</div>
+    <a
+        href="#home"
+        class="hotspot nav-home"
+        aria-label="ראשי"
+    ></a>
 
 
-<div class="step reveal">
-
-<div class="step-icon">
-&lt;/&gt;
-</div>
-
-<div class="step-number">
-03
-</div>
-
-<h3>
-מעצבים ובונים
-</h3>
-
-<p>
-מעצבים את חוויית המשתמש
-ובונים אתר מהיר ומדויק.
-</p>
-
-</div>
+    <a
+        href="#services"
+        class="hotspot nav-services"
+        aria-label="שירותים"
+    ></a>
 
 
-<div class="step reveal">
+    <a
+        href="#process"
+        class="hotspot nav-process"
+        aria-label="תהליך עבודה"
+    ></a>
 
-<div class="step-icon">
-🚀
-</div>
 
-<div class="step-number">
-04
-</div>
+    <a
+        href="#home"
+        class="hotspot nav-about"
+        aria-label="אודות"
+    ></a>
 
-<h3>
-משיקים
-</h3>
 
-<p>
-עולים לאוויר ומשאירים
-את העסק שלך קדימה.
-</p>
-
-</div>
-
-</div>
-
-</div>
+    <a
+        href="#contact"
+        class="hotspot nav-contact"
+        aria-label="יצירת קשר"
+    ></a>
 
 </section>
 
 
 
-<!-- ================= ABOUT ================= -->
+<!-- =====================================================
+     PAGE 4
+     התמונה הרביעית ששלחת
+     יצירת קשר
+===================================================== -->
 
-<section id="about">
-
-<div style="width:100%;text-align:center">
-
-<h2 class="section-title reveal">
-אודות
-</h2>
-
-<div class="divider"></div>
-
-<div
-class="reveal"
-style="
-max-width:700px;
-margin:auto;
-font-size:20px;
-line-height:2;
-color:#c8c1b8;
-"
+<section
+    id="contact"
+    class="page"
 >
 
-סטודיו STAV PUZIN מתמחה ביצירת
-אתרים ודפי נחיתה בעלי נראות יוקרתית,
-חוויית משתמש מדויקת ונוכחות דיגיטלית
-שמתאימה למותג שלך.
-
-</div>
-
-</div>
-
-</section>
+    <img
+        src="page4.jpg"
+        class="page-image"
+        alt="Stav Puzin - יצירת קשר"
+    >
 
 
+    <!-- תפריט -->
 
-<!-- ================= CONTACT ================= -->
-
-<section id="contact">
-
-<div style="width:100%">
-
-<div class="contact-box reveal">
-
-<div class="contact-text">
-
-<h2>
-בואי נדבר
-</h2>
-
-<p>
-יש לך רעיון? בואי נבנה אותו.<br>
-אני כאן כדי לעזור לך להפוך רעיון
-לנוכחות דיגיטלית שמביאה תוצאות.
-</p>
-
-</div>
+    <a
+        href="#home"
+        class="hotspot nav-home"
+        aria-label="ראשי"
+    ></a>
 
 
-<div class="contact-grid">
+    <a
+        href="#services"
+        class="hotspot nav-services"
+        aria-label="שירותים"
+    ></a>
 
 
-<a
-class="contact-card"
-href="tel:0549815445"
->
-
-<div class="contact-icon">
-⌕
-</div>
-
-<strong>
-0549815445
-</strong>
-
-<span>
-→ להתקשר
-</span>
-
-</a>
+    <a
+        href="#process"
+        class="hotspot nav-process"
+        aria-label="תהליך עבודה"
+    ></a>
 
 
-<a
-class="contact-card"
-href="mailto:Stavpuzin@gmail.com"
->
-
-<div class="contact-icon">
-✉
-</div>
-
-<strong>
-Stavpuzin@gmail.com
-</strong>
-
-<span>
-→ לשליחת מייל
-</span>
-
-</a>
+    <a
+        href="#home"
+        class="hotspot nav-about"
+        aria-label="אודות"
+    ></a>
 
 
-<a
-class="contact-card"
-href="https://www.facebook.com/share/1B2YhJr8SM/?mibextid=wwXIfr"
-target="_blank"
->
-
-<div class="contact-icon">
-f
-</div>
-
-<strong>
-Facebook
-</strong>
-
-<span>
-→ לעמוד בפייסבוק
-</span>
-
-</a>
+    <a
+        href="#contact"
+        class="hotspot nav-contact"
+        aria-label="יצירת קשר"
+    ></a>
 
 
-</div>
+    <!-- טלפון -->
 
-</div>
+    <a
+        href="tel:0549815445"
+        class="hotspot contact-phone"
+        aria-label="התקשרו אלינו"
+    ></a>
 
 
-<footer class="reveal">
+    <!-- מייל -->
 
-<div class="footer-sp">
-SP
-</div>
+    <a
+        href="mailto:Stavpuzin@gmail.com"
+        class="hotspot contact-email"
+        aria-label="שליחת מייל"
+    ></a>
 
-<div class="footer-name">
-STAV PUZIN
-</div>
 
-<div class="footer-sub">
-WEB DESIGN STUDIO
-</div>
+    <!-- פייסבוק -->
 
-</footer>
-
-</div>
+    <a
+        href="https://www.facebook.com/share/1B2YhJr8SM/?mibextid=wwXIfr"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hotspot contact-facebook"
+        aria-label="Facebook"
+    ></a>
 
 </section>
 
@@ -1362,88 +528,121 @@ WEB DESIGN STUDIO
 
 <script>
 
-const elements =
-document.querySelectorAll(".reveal");
+/* =====================================================
+   PAGE ROUTING
+===================================================== */
 
-const observer =
-new IntersectionObserver(
+function showPage(pageName) {
 
-(entries)=>{
+    const pages =
+        document.querySelectorAll(".page");
 
-entries.forEach(
-(entry)=>{
 
-if(entry.isIntersecting){
+    pages.forEach(function(page) {
 
-entry.target.classList.add("show");
+        page.classList.remove("active");
+
+    });
+
+
+    const selectedPage =
+        document.getElementById(pageName);
+
+
+    if (selectedPage) {
+
+        selectedPage.classList.add("active");
+
+    }
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "instant"
+    });
 
 }
 
+
+/* =====================================================
+   URL ROUTING
+===================================================== */
+
+function loadPage() {
+
+    let pageName =
+        window.location.hash.replace("#", "");
+
+
+    if (
+        pageName !== "home" &&
+        pageName !== "services" &&
+        pageName !== "process" &&
+        pageName !== "contact"
+    ) {
+
+        pageName = "home";
+
+    }
+
+
+    showPage(pageName);
+
 }
+
+
+/* =====================================================
+   CLICK NAVIGATION
+===================================================== */
+
+document
+    .querySelectorAll('a[href^="#"]')
+    .forEach(function(link) {
+
+        link.addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const target =
+                    this.getAttribute("href")
+                    .replace("#", "");
+
+
+                history.pushState(
+                    {},
+                    "",
+                    "#" + target
+                );
+
+
+                showPage(target);
+
+            }
+        );
+
+    });
+
+
+/* =====================================================
+   BACK / FORWARD
+===================================================== */
+
+window.addEventListener(
+    "popstate",
+    loadPage
 );
 
-},
-{
-threshold:.12
-}
-);
 
-elements.forEach(
-element =>
-observer.observe(element)
-);
+/* =====================================================
+   INITIAL PAGE
+===================================================== */
 
-
-/* active navigation */
-
-const sections =
-document.querySelectorAll("section");
-
-const links =
-document.querySelectorAll("nav a");
-
-const navObserver =
-new IntersectionObserver(
-
-(entries)=>{
-
-entries.forEach(
-(entry)=>{
-
-if(entry.isIntersecting){
-
-links.forEach(
-(link)=>{
-
-link.classList.remove("active");
-
-if(
-link.getAttribute("href")
-===
-"#"+entry.target.id
-){
-
-link.classList.add("active");
-
-}
-
-}
-);
-
-}
-
-}
-);
-
-},
-{
-threshold:.45
-}
-);
-
-sections.forEach(
-section =>
-navObserver.observe(section)
+window.addEventListener(
+    "load",
+    loadPage
 );
 
 </script>
