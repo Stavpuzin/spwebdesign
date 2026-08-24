@@ -7,96 +7,127 @@
 <title>STAV PUZIN — Web Design Studio</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap');
+:root{
+  --bg:#02040b;
+  --blue:#315cff;
+  --cyan:#00d9ff;
+  --text:#fff;
+  --muted:#9da9c2;
+}
 
-*{box-sizing:border-box;}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-html{scroll-behavior:smooth;}
+html{
+  scroll-behavior:smooth;
+}
 
 body{
-  margin:0;
-  background:#02040b;
-  color:#fff;
+  background:var(--bg);
+  color:var(--text);
   font-family:Assistant,Arial,sans-serif;
   overflow-x:hidden;
 }
 
-body:before{
-  content:"";
+/* CURSOR GLOW */
+
+.cursor-glow{
+  position:fixed;
+  width:320px;
+  height:320px;
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,#315cff25,transparent 65%);
+  z-index:1;
+  transition:opacity .3s;
+}
+
+/* LOADING */
+
+.loader{
   position:fixed;
   inset:0;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 75% 20%,#1645ff28,transparent 32%),
-    radial-gradient(circle at 15% 80%,#00c8ff18,transparent 30%);
+  background:#02040b;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  transition:opacity 1s,visibility 1s;
 }
+
+.loader.hide{
+  opacity:0;
+  visibility:hidden;
+}
+
+.loader-logo{
+  font-family:"Space Grotesk";
+  font-size:clamp(40px,8vw,90px);
+  font-weight:700;
+  letter-spacing:-4px;
+  background:linear-gradient(90deg,#fff,#4d75ff,#00d9ff,#fff);
+  background-size:300%;
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:gradient 3s linear infinite;
+}
+
+.loader-line{
+  width:180px;
+  height:2px;
+  margin-top:25px;
+  background:#ffffff15;
+  overflow:hidden;
+}
+
+.loader-line:after{
+  content:"";
+  display:block;
+  width:60%;
+  height:100%;
+  background:linear-gradient(90deg,#315cff,#00d9ff);
+  animation:loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading{
+  0%{transform:translateX(-180px)}
+  100%{transform:translateX(300px)}
+}
+
+/* NAV */
 
 .nav{
   position:fixed;
   top:0;
   left:0;
   right:0;
-  height:78px;
+  height:76px;
+  padding:0 6vw;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 6vw;
-  border-bottom:1px solid #ffffff12;
-  background:#02040bd9;
-  backdrop-filter:blur(20px);
+  background:#02040bc9;
+  backdrop-filter:blur(22px);
+  border-bottom:1px solid #ffffff10;
   z-index:100;
 }
 
-.mark{
-  width:52px;
-  height:52px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-  border-radius:50%;
-  transition:.35s ease;
-  filter:drop-shadow(0 0 10px #315cff55);
+.brand-mini{
+  font-family:"Space Grotesk";
+  font-weight:700;
+  letter-spacing:2px;
+  font-size:15px;
 }
 
-.mark:hover{
-  transform:rotate(-8deg) scale(1.08);
-  filter:drop-shadow(0 0 18px #00a8ff90);
-}
-
-.mark svg{
-  width:46px;
-  height:46px;
-  overflow:visible;
-}
-
-.mark-ring{
-  fill:none;
-  stroke:url(#markGrad);
-  stroke-width:1.2;
-  opacity:.55;
-}
-
-.mark-s{
-  fill:none;
-  stroke:url(#markGrad);
-  stroke-width:3.2;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-
-.mark-orbit{
-  fill:none;
-  stroke:#4d75ff;
-  stroke-width:1.4;
-  stroke-linecap:round;
-  opacity:.9;
-}
-
-.mark-dot{
-  fill:#fff;
-  filter:drop-shadow(0 0 5px #00d9ff);
+.brand-mini span{
+  color:#4d75ff;
 }
 
 .nav-links{
@@ -105,14 +136,10 @@ body:before{
 }
 
 .nav-links a{
-  border:0;
-  background:none;
-  color:#929db5;
-  cursor:pointer;
-  font-family:inherit;
-  font-size:16px;
-  transition:.3s;
+  color:#8995ad;
   text-decoration:none;
+  font-size:15px;
+  transition:.3s;
 }
 
 .nav-links a:hover,
@@ -120,252 +147,487 @@ body:before{
   color:#fff;
 }
 
-section{
+.progress{
+  position:fixed;
+  top:0;
+  right:0;
+  height:3px;
+  width:0;
+  background:linear-gradient(90deg,#315cff,#00d9ff);
+  z-index:500;
+}
+
+/* HERO */
+
+.hero{
   min-height:100vh;
-  padding:130px 8vw 80px;
   position:relative;
   display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-#home{
-  text-align:center;
   align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:130px 7vw 100px;
+  overflow:hidden;
 }
 
-.eyebrow{
+.grid{
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(#ffffff06 1px,transparent 1px),
+    linear-gradient(90deg,#ffffff06 1px,transparent 1px);
+  background-size:70px 70px;
+  mask-image:linear-gradient(to bottom,black,transparent);
+}
+
+.hero-light{
+  position:absolute;
+  width:650px;
+  height:650px;
+  border-radius:50%;
+  background:radial-gradient(circle,#174cff22,transparent 68%);
+  filter:blur(20px);
+  animation:pulse 5s ease-in-out infinite;
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(1);opacity:.7}
+  50%{transform:scale(1.18);opacity:1}
+}
+
+.hero-content{
+  position:relative;
+  z-index:3;
+  max-width:1050px;
+}
+
+.kicker{
   font:700 12px "Space Grotesk";
-  letter-spacing:4px;
+  letter-spacing:5px;
   color:#5d83ff;
-  margin-bottom:20px;
+  margin-bottom:28px;
 }
 
-h1{
-  margin:0;
+.hero h1{
   font-size:clamp(55px,9vw,125px);
   line-height:.9;
-  letter-spacing:-5px;
-  max-width:1100px;
+  letter-spacing:-6px;
 }
 
 .gradient{
-  background:linear-gradient(90deg,#fff,#4b76ff,#00d9ff,#fff);
+  background:linear-gradient(90deg,#fff,#5a7cff,#00d9ff,#fff);
   background-size:300%;
   -webkit-background-clip:text;
   color:transparent;
-  animation:gradientMove 5s infinite linear;
+  animation:gradient 5s linear infinite;
 }
 
-@keyframes gradientMove{
-  to{background-position:300%;}
+@keyframes gradient{
+  to{background-position:300%}
 }
 
-.lead{
+.hero p{
+  max-width:680px;
+  margin:35px auto;
   color:#aeb7ca;
-  max-width:700px;
   font-size:20px;
-  line-height:1.7;
-  margin:32px 0;
+  line-height:1.8;
 }
 
-.buttons{
+.hero-buttons{
   display:flex;
-  gap:15px;
   justify-content:center;
+  gap:15px;
   flex-wrap:wrap;
 }
 
 .btn{
-  padding:16px 28px;
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:17px 30px;
   border-radius:100px;
   text-decoration:none;
-  border:1px solid #ffffff18;
-  transition:.3s;
   font-weight:700;
-  cursor:pointer;
+  transition:.35s;
+  overflow:hidden;
+}
+
+.btn:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,#ffffff35,transparent);
+  transform:translateX(-100%);
+  transition:.5s;
+}
+
+.btn:hover:before{
+  transform:translateX(100%);
 }
 
 .primary{
   color:#fff;
   background:linear-gradient(100deg,#315cff,#00a8ff);
-  box-shadow:0 0 35px #315cff40;
+  box-shadow:0 0 45px #315cff45;
 }
 
 .primary:hover{
-  transform:translateY(-4px);
-  box-shadow:0 0 60px #315cff70;
+  transform:translateY(-5px) scale(1.03);
+  box-shadow:0 0 70px #315cff75;
 }
 
 .secondary{
   color:#fff;
+  border:1px solid #ffffff20;
   background:#ffffff08;
 }
 
 .secondary:hover{
-  background:#ffffff13;
+  transform:translateY(-5px);
+  background:#ffffff12;
 }
+
+/* FLOATING ORBS */
 
 .orb{
   position:absolute;
   border-radius:50%;
   pointer-events:none;
+  filter:blur(2px);
 }
 
-.orb1{
-  width:450px;
-  height:450px;
-  right:-200px;
-  top:150px;
-  background:#2148ff20;
-  box-shadow:0 0 180px #2148ff35;
+.orb-a{
+  width:18px;
+  height:18px;
+  background:#00d9ff;
+  box-shadow:0 0 40px #00d9ff;
+  top:25%;
+  left:16%;
+  animation:float1 6s ease-in-out infinite;
 }
 
-.orb2{
-  width:250px;
-  height:250px;
-  left:-80px;
-  bottom:100px;
-  background:#00d9ff15;
-  box-shadow:0 0 120px #00d9ff30;
+.orb-b{
+  width:10px;
+  height:10px;
+  background:#5d83ff;
+  box-shadow:0 0 35px #315cff;
+  top:35%;
+  right:17%;
+  animation:float2 5s ease-in-out infinite;
 }
 
-.ticker{
+.orb-c{
+  width:7px;
+  height:7px;
+  background:#fff;
+  box-shadow:0 0 25px #fff;
+  bottom:25%;
+  left:25%;
+  animation:float1 7s ease-in-out infinite;
+}
+
+@keyframes float1{
+  0%,100%{transform:translate(0,0)}
+  50%{transform:translate(30px,-40px)}
+}
+
+@keyframes float2{
+  0%,100%{transform:translate(0,0)}
+  50%{transform:translate(-30px,30px)}
+}
+
+/* SCROLL HINT */
+
+.scroll{
   position:absolute;
-  bottom:0;
-  left:0;
-  width:100%;
-  overflow:hidden;
-  border-top:1px solid #ffffff10;
-  border-bottom:1px solid #ffffff10;
-  padding:15px 0;
-  color:#52648f;
-  white-space:nowrap;
-  font:700 13px "Space Grotesk";
+  bottom:30px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  color:#53617b;
+  font:11px "Space Grotesk";
+  letter-spacing:3px;
 }
 
-.ticker div{
-  display:inline-block;
-  animation:moveText 20s linear infinite;
+.mouse{
+  width:23px;
+  height:35px;
+  border:1px solid #ffffff35;
+  border-radius:20px;
+  position:relative;
 }
 
-@keyframes moveText{
-  from{transform:translateX(0);}
-  to{transform:translateX(50%);}
+.mouse:after{
+  content:"";
+  position:absolute;
+  width:3px;
+  height:7px;
+  background:#4d75ff;
+  border-radius:3px;
+  left:50%;
+  top:7px;
+  transform:translateX(-50%);
+  animation:mouse 1.7s infinite;
 }
 
-.section-title{
-  margin-bottom:50px;
+@keyframes mouse{
+  0%{opacity:0;transform:translate(-50%,0)}
+  30%{opacity:1}
+  100%{opacity:0;transform:translate(-50%,12px)}
 }
 
-.section-title h2{
+/* SECTIONS */
+
+section{
+  position:relative;
+  min-height:100vh;
+  padding:130px 8vw;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.section-head{
+  max-width:900px;
+  margin-bottom:60px;
+}
+
+.section-head h2{
   font-size:clamp(50px,8vw,100px);
   line-height:.9;
-  margin:0;
-  letter-spacing:-4px;
+  letter-spacing:-5px;
+  margin-top:10px;
 }
+
+.section-head p{
+  max-width:650px;
+  color:#8e9ab3;
+  font-size:19px;
+  line-height:1.8;
+  margin-top:30px;
+}
+
+/* CARDS */
 
 .cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:20px;
-  max-width:1150px;
+  max-width:1200px;
   width:100%;
 }
 
 .card{
-  min-height:310px;
-  padding:35px;
-  border:1px solid #ffffff15;
-  border-radius:25px;
-  background:linear-gradient(145deg,#ffffff0b,#ffffff02);
-  transition:.4s;
   position:relative;
+  min-height:350px;
+  padding:35px;
+  border:1px solid #ffffff13;
+  border-radius:28px;
+  background:linear-gradient(145deg,#ffffff0a,#ffffff02);
   overflow:hidden;
+  transition:transform .15s,border-color .3s,box-shadow .3s;
+  transform-style:preserve-3d;
+}
+
+.card:before{
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  background:#315cff22;
+  filter:blur(70px);
+  right:-100px;
+  top:-100px;
+  transition:.5s;
 }
 
 .card:hover{
-  transform:translateY(-10px);
-  border-color:#4673ff80;
-  box-shadow:0 25px 80px #0009;
+  border-color:#4d75ff80;
+  box-shadow:0 30px 100px #000b;
+}
+
+.card:hover:before{
+  transform:scale(1.5);
 }
 
 .number{
-  color:#5279ff;
   font:600 14px "Space Grotesk";
+  color:#5279ff;
 }
 
 .card h3{
-  font-size:32px;
-  margin-top:65px;
-  margin-bottom:12px;
+  font-size:34px;
+  margin-top:70px;
+  margin-bottom:15px;
+  position:relative;
 }
 
 .card p{
-  color:#aeb7ca;
-  line-height:1.7;
+  color:#a5afc2;
   font-size:17px;
+  line-height:1.8;
+  position:relative;
 }
 
-.tag{
+.card-tag{
+  position:absolute;
+  bottom:30px;
   color:#4c70bd;
   font:10px "Space Grotesk";
   letter-spacing:3px;
 }
 
-.contact-content{
-  max-width:1100px;
+/* PROCESS */
+
+.process{
+  min-height:auto;
+}
+
+.process-line{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  max-width:1200px;
+}
+
+.step{
+  padding:30px 20px;
+  border-top:1px solid #ffffff18;
+  position:relative;
+}
+
+.step-number{
+  font:700 38px "Space Grotesk";
+  color:#315cff;
+}
+
+.step h3{
+  margin-top:20px;
+  font-size:24px;
+}
+
+.step p{
+  margin-top:12px;
+  color:#8995ad;
+  line-height:1.7;
+}
+
+/* CONTACT */
+
+.contact{
+  min-height:90vh;
+}
+
+.contact-box{
+  position:relative;
+  overflow:hidden;
+  max-width:1200px;
   width:100%;
+  padding:70px;
+  border-radius:40px;
+  border:1px solid #ffffff18;
+  background:
+    radial-gradient(circle at 80% 20%,#315cff18,transparent 30%),
+    linear-gradient(145deg,#ffffff0a,#ffffff02);
+}
+
+.contact-box:after{
+  content:"";
+  position:absolute;
+  width:400px;
+  height:400px;
+  border-radius:50%;
+  background:#00d9ff12;
+  filter:blur(80px);
+  left:-150px;
+  bottom:-200px;
+}
+
+.contact-box h2{
+  font-size:clamp(55px,8vw,105px);
+  line-height:.9;
+  letter-spacing:-5px;
+  position:relative;
+  z-index:2;
+}
+
+.contact-box p{
+  color:#9ba7bd;
+  font-size:19px;
+  line-height:1.8;
+  max-width:650px;
+  margin:30px 0;
+  position:relative;
+  z-index:2;
 }
 
 .contact-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:18px;
-  margin-top:35px;
+  gap:15px;
+  margin-top:40px;
+  position:relative;
+  z-index:2;
 }
 
 .contact-card{
-  padding:30px;
+  padding:25px;
   border:1px solid #ffffff15;
-  border-radius:24px;
+  border-radius:20px;
   background:#ffffff06;
-  text-decoration:none;
   color:#fff;
+  text-decoration:none;
   transition:.35s;
 }
 
 .contact-card:hover{
-  transform:translateY(-8px);
-  border-color:#4b76ff90;
-  box-shadow:0 20px 60px #0008;
+  transform:translateY(-7px);
+  border-color:#4d75ff80;
+  background:#315cff12;
 }
 
 .contact-card small{
   display:block;
   color:#557bff;
-  font:700 11px "Space Grotesk";
+  font:700 10px "Space Grotesk";
   letter-spacing:3px;
-  margin-bottom:15px;
+  margin-bottom:12px;
 }
 
 .contact-card strong{
   display:block;
-  font-size:22px;
-  margin-bottom:12px;
+  font-size:19px;
 }
 
 .contact-card span{
-  color:#8794ae;
+  display:block;
+  color:#77859e;
+  margin-top:8px;
 }
 
-/* ================= LOGO בסוף האתר ================= */
+/* FINAL LOGO */
+
+.final{
+  min-height:auto;
+  padding:100px 6vw 130px;
+  align-items:center;
+  text-align:center;
+}
+
+.final-line{
+  width:100%;
+  height:1px;
+  background:linear-gradient(90deg,transparent,#315cff,transparent);
+  margin-bottom:80px;
+}
 
 .logo-center{
-  width:min(650px,88vw);
-  margin:80px auto 100px;
-  animation:float 5s ease-in-out infinite;
-  z-index:2;
+  width:min(650px,90vw);
+  animation:logoFloat 5s ease-in-out infinite;
 }
 
 .logo-center img{
@@ -373,209 +635,210 @@ h1{
   display:block;
   border-radius:28px;
   box-shadow:
-    0 0 30px #2862ff70,
-    0 0 100px #2862ff35;
+    0 0 40px #2862ff65,
+    0 0 120px #2862ff30;
 }
 
-@keyframes float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
+.final p{
+  margin-top:35px;
+  color:#5f6d86;
+  font:12px "Space Grotesk";
+  letter-spacing:4px;
 }
 
-@media(max-width:800px){
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+
+/* REVEAL */
+
+.reveal{
+  opacity:0;
+  transform:translateY(50px);
+  transition:opacity 1s ease,transform 1s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
 
   .nav{
     padding:0 5vw;
   }
 
+  .brand-mini{
+    font-size:12px;
+  }
+
   .nav-links{
-    gap:12px;
+    gap:14px;
   }
 
   .nav-links a{
-    font-size:13px;
+    font-size:12px;
   }
 
-  .mark{
-    width:44px;
-    height:44px;
+  .hero{
+    padding-left:6vw;
+    padding-right:6vw;
   }
 
-  .mark svg{
-    width:40px;
-    height:40px;
-  }
-
-  section{
-    padding:115px 6vw 70px;
-  }
-
-  h1{
+  .hero h1{
     font-size:58px;
     letter-spacing:-3px;
   }
 
-  .lead{
-    font-size:18px;
+  .hero p{
+    font-size:17px;
+  }
+
+  section{
+    padding:110px 6vw 80px;
+  }
+
+  .section-head h2{
+    font-size:58px;
+    letter-spacing:-3px;
   }
 
   .cards,
+  .process-line,
   .contact-grid{
     grid-template-columns:1fr;
   }
 
-  .logo-center{
-    width:90vw;
+  .card{
+    min-height:300px;
   }
 
-  .section-title h2{
+  .contact-box{
+    padding:40px 25px;
+    border-radius:28px;
+  }
+
+  .contact-box h2{
     font-size:58px;
+    letter-spacing:-3px;
+  }
+
+  .scroll{
+    display:none;
   }
 }
-
 </style>
 </head>
 
 <body>
 
+<!-- LOADER -->
+
+<div class="loader" id="loader">
+  <div class="loader-logo">STAV PUZIN</div>
+  <div class="loader-line"></div>
+</div>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="progress" id="progress"></div>
+
+<!-- NAV -->
+
 <header class="nav">
 
-  <a href="#home" class="mark" aria-label="STAV PUZIN">
-
-    <svg viewBox="0 0 64 64" aria-hidden="true">
-
-      <defs>
-
-        <linearGradient
-          id="markGrad"
-          x1="8"
-          y1="8"
-          x2="56"
-          y2="56"
-        >
-
-          <stop offset="0%" stop-color="#ffffff"/>
-          <stop offset="45%" stop-color="#4d75ff"/>
-          <stop offset="100%" stop-color="#00d9ff"/>
-
-        </linearGradient>
-
-      </defs>
-
-      <circle
-        class="mark-ring"
-        cx="32"
-        cy="32"
-        r="23"
-      />
-
-      <path
-        class="mark-s"
-        d="M42 21c-3-4-7-6-12-6-7 0-12 4-12 9 0 6 5 8 13 10 7 2 11 4 11 9 0 5-5 9-12 9-6 0-11-2-14-7"
-      />
-
-      <path
-        class="mark-orbit"
-        d="M8 38c8-13 23-21 40-18 4 1 7 2 9 4"
-      />
-
-      <circle
-        class="mark-dot"
-        cx="53"
-        cy="21"
-        r="2.5"
-      />
-
-    </svg>
-
+  <a href="#home" class="brand-mini">
+    STAV <span>PUZIN</span>
   </a>
 
   <nav class="nav-links">
 
-    <a class="active" href="#home">
-      ראשי
-    </a>
+    <a href="#home" class="active">ראשי</a>
 
-    <a href="#services">
-      השירותים
-    </a>
+    <a href="#services">השירותים</a>
 
-    <a href="#contact">
-      יצירת קשר
-    </a>
+    <a href="#process">התהליך</a>
+
+    <a href="#contact">יצירת קשר</a>
 
   </nav>
 
 </header>
 
 
-<!-- ================= HOME ================= -->
+<!-- HERO -->
 
-<section id="home">
+<section class="hero" id="home">
 
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
+  <div class="grid"></div>
 
-  <div class="eyebrow">
-    WEB DESIGN • DEVELOPMENT • BRAND
-  </div>
+  <div class="hero-light"></div>
 
-  <h1>
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+  <div class="orb orb-c"></div>
 
-    האתר שיגרום ללקוחות
+  <div class="hero-content reveal">
 
-    <br>
+    <div class="kicker">
+      WEB DESIGN • DEVELOPMENT • BRAND
+    </div>
 
-    <span class="gradient">
-      לבחור דווקא בעסק שלך.
-    </span>
+    <h1>
 
-  </h1>
+      האתר שיגרום ללקוחות
 
-  <p class="lead">
+      <br>
 
-    דפי נחיתה ואתרים לנשים ולגברים,
-    לעצמאים ולעסקים שרוצים להיראות מקצועיים,
-    למשוך תשומת לב ולהפוך גולשים ללקוחות.
+      <span class="gradient">
+        לבחור דווקא בעסק שלך.
+      </span>
 
-  </p>
+    </h1>
 
-  <div class="buttons">
+    <p>
 
-    <a class="btn primary" href="#contact">
-      בואו נבנה לכם אתר
-    </a>
+      דפי נחיתה ואתרים לנשים ולגברים,
+      לעצמאים ולעסקים שרוצים להיראות מקצועיים,
+      למשוך תשומת לב ולהפוך גולשים ללקוחות.
 
-    <a class="btn secondary" href="#services">
-      לראות מה אני מציעה ↓
-    </a>
+    </p>
 
-  </div>
+    <div class="hero-buttons">
 
-  <div class="ticker">
+      <a class="btn primary" href="#contact">
+        בואו נבנה לכם אתר
+      </a>
 
-    <div>
-
-      DESIGN • MOTION • CONVERSION •
-
-      DESIGN • MOTION • CONVERSION •
-
-      DESIGN • MOTION • CONVERSION •
+      <a class="btn secondary" href="#services">
+        להכיר את השירותים ↓
+      </a>
 
     </div>
+
+  </div>
+
+  <div class="scroll">
+
+    SCROLL
+
+    <div class="mouse"></div>
 
   </div>
 
 </section>
 
 
-<!-- ================= SERVICES ================= -->
+<!-- SERVICES -->
 
 <section id="services">
 
-  <div class="section-title">
+  <div class="section-head reveal">
 
-    <div class="eyebrow">
+    <div class="kicker">
       WHAT I BUILD
     </div>
 
@@ -591,70 +854,65 @@ h1{
 
     </h2>
 
+    <p>
+      כל אתר נבנה מתוך מחשבה על הרושם הראשון,
+      על האנשים שיגיעו אליו ועל הפעולה שאנחנו רוצים
+      שהם יעשו.
+    </p>
+
   </div>
+
 
   <div class="cards">
 
-    <article class="card">
+    <article class="card reveal">
 
-      <div class="number">
-        01
-      </div>
+      <div class="number">01</div>
 
-      <h3>
-        דף נחיתה
-      </h3>
+      <h3>דף נחיתה</h3>
 
       <p>
-        עמוד חד ומדויק שמציג את העסק שלך
-        ומוביל את המבקר לפעולה.
+        עמוד חד ומדויק שמציג את העסק שלך,
+        מספר את הסיפור ומוביל את המבקר לפעולה.
       </p>
 
-      <div class="tag">
+      <div class="card-tag">
         LANDING PAGE
       </div>
 
     </article>
 
 
-    <article class="card">
+    <article class="card reveal">
 
-      <div class="number">
-        02
-      </div>
+      <div class="number">02</div>
 
-      <h3>
-        אתר תדמית
-      </h3>
+      <h3>אתר תדמית</h3>
 
       <p>
         נוכחות דיגיטלית מלאה עם עיצוב ייחודי,
-        תוכן ברור וחוויית משתמש.
+        תוכן ברור וחוויית משתמש שמרגישה מקצועית.
       </p>
 
-      <div class="tag">
+      <div class="card-tag">
         BUSINESS WEBSITE
       </div>
 
     </article>
 
 
-    <article class="card">
+    <article class="card reveal">
 
-      <div class="number">
-        03
-      </div>
+      <div class="number">03</div>
 
-      <h3>
-        עיצוב אישי
-      </h3>
+      <h3>עיצוב אישי</h3>
 
       <p>
         צבעים, אנימציות, טיפוגרפיה ואווירה
-        שנבנים במיוחד עבור המותג שלך.
+        שנבנים במיוחד עבור המותג והלקוחות שלך.
       </p>
 
-      <div class="tag">
+      <div class="card-tag">
         CREATIVE DESIGN
       </div>
 
@@ -665,17 +923,100 @@ h1{
 </section>
 
 
-<!-- ================= CONTACT ================= -->
+<!-- PROCESS -->
 
-<section id="contact">
+<section class="process" id="process">
 
-  <div class="contact-content">
+  <div class="section-head reveal">
 
-    <div class="eyebrow">
+    <div class="kicker">
+      THE PROCESS
+    </div>
+
+    <h2>
+
+      מרעיון
+
+      <br>
+
+      <span class="gradient">
+        לאתר חי.
+      </span>
+
+    </h2>
+
+  </div>
+
+
+  <div class="process-line">
+
+    <div class="step reveal">
+
+      <div class="step-number">01</div>
+
+      <h3>מכירים</h3>
+
+      <p>
+        מבינים את העסק, הקהל והכיוון שלך.
+      </p>
+
+    </div>
+
+
+    <div class="step reveal">
+
+      <div class="step-number">02</div>
+
+      <h3>מעצבים</h3>
+
+      <p>
+        יוצרים שפה ויזואלית שמתאימה בדיוק לך.
+      </p>
+
+    </div>
+
+
+    <div class="step reveal">
+
+      <div class="step-number">03</div>
+
+      <h3>בונים</h3>
+
+      <p>
+        הופכים את העיצוב לאתר מהיר ואינטראקטיבי.
+      </p>
+
+    </div>
+
+
+    <div class="step reveal">
+
+      <div class="step-number">04</div>
+
+      <h3>משיקים</h3>
+
+      <p>
+        האתר עולה לאוויר ומוכן להביא לקוחות.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+
+  <div class="contact-box reveal">
+
+    <div class="kicker">
       LET'S TALK
     </div>
 
-    <h1>
+    <h2>
 
       יש לך רעיון?
 
@@ -685,15 +1026,22 @@ h1{
         בואו נבנה אותו.
       </span>
 
-    </h1>
+    </h2>
 
-    <p class="lead">
+    <p>
 
-      שלחו הודעה ונחזור אליכם כדי להבין
-      מה העסק שלכם צריך ולבנות עבורכם
-      אתר שמתאים בדיוק לכם.
+      ספרו לי מה העסק שלכם צריך,
+      ונבנה יחד נוכחות דיגיטלית
+      שנראית טוב ומרגישה נכון.
 
     </p>
+
+    <a class="btn primary" href="mailto:Stavpuzin@gmail.com">
+
+      מתחילים כאן ↗
+
+    </a>
+
 
     <div class="contact-grid">
 
@@ -702,17 +1050,11 @@ h1{
         href="tel:0549815445"
       >
 
-        <small>
-          PHONE
-        </small>
+        <small>PHONE</small>
 
-        <strong>
-          0549815445
-        </strong>
+        <strong>0549815445</strong>
 
-        <span>
-          להתקשר ↗
-        </span>
+        <span>להתקשר ↗</span>
 
       </a>
 
@@ -722,17 +1064,11 @@ h1{
         href="mailto:Stavpuzin@gmail.com"
       >
 
-        <small>
-          EMAIL
-        </small>
+        <small>EMAIL</small>
 
-        <strong>
-          Stavpuzin@gmail.com
-        </strong>
+        <strong>Stavpuzin@gmail.com</strong>
 
-        <span>
-          לשלוח מייל ↗
-        </span>
+        <span>לשלוח מייל ↗</span>
 
       </a>
 
@@ -744,17 +1080,11 @@ h1{
         rel="noopener"
       >
 
-        <small>
-          FACEBOOK
-        </small>
+        <small>FACEBOOK</small>
 
-        <strong>
-          Facebook
-        </strong>
+        <strong>Facebook</strong>
 
-        <span>
-          לעמוד בפייסבוק ↗
-        </span>
+        <span>לעמוד בפייסבוק ↗</span>
 
       </a>
 
@@ -765,62 +1095,187 @@ h1{
 </section>
 
 
-<!-- ================= LOGO בסוף ================= -->
+<!-- FINAL LOGO -->
 
-<div class="logo-center">
+<section class="final">
 
-  <img
-    src="./logo.jpeg"
-    alt="STAV PUZIN WEB DESIGN STUDIO"
-  >
+  <div class="final-line"></div>
 
-</div>
+  <div class="logo-center reveal">
+
+    <img
+      src="./logo.jpeg"
+      alt="STAV PUZIN WEB DESIGN STUDIO"
+    >
+
+  </div>
+
+  <p>
+    WEBSITES • LANDING PAGES • ONLINE PRESENCE
+  </p>
+
+</section>
 
 
 <script>
 
-const sections =
-  document.querySelectorAll("section");
+/* LOADER */
 
-const navLinks =
-  document.querySelectorAll(".nav-links a");
+window.addEventListener("load",()=>{
 
-window.addEventListener(
-  "scroll",
-  () => {
+  setTimeout(()=>{
 
-    let current = "home";
+    document
+      .getElementById("loader")
+      .classList.add("hide");
 
-    sections.forEach(
-      section => {
+  },900);
 
-        if(
-          window.scrollY >=
-          section.offsetTop - 220
-        ){
+});
 
-          current =
-            section.id;
+
+/* CURSOR */
+
+const glow =
+  document.getElementById("cursorGlow");
+
+document.addEventListener("mousemove",(e)=>{
+
+  glow.style.left=e.clientX+"px";
+  glow.style.top=e.clientY+"px";
+
+});
+
+
+/* SCROLL PROGRESS */
+
+window.addEventListener("scroll",()=>{
+
+  const scrollTop =
+    window.scrollY;
+
+  const height =
+    document.documentElement.scrollHeight -
+    window.innerHeight;
+
+  const percent =
+    (scrollTop / height) * 100;
+
+  document
+    .getElementById("progress")
+    .style.width =
+    percent+"%";
+
+});
+
+
+/* REVEAL */
+
+const observer =
+  new IntersectionObserver(
+    entries=>{
+
+      entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+          entry.target
+            .classList
+            .add("visible");
 
         }
 
-      }
+      });
+
+    },
+    {
+      threshold:.12
+    }
+  );
+
+
+document
+  .querySelectorAll(".reveal")
+  .forEach(el=>observer.observe(el));
+
+
+/* 3D CARDS */
+
+document
+  .querySelectorAll(".card")
+  .forEach(card=>{
+
+    card.addEventListener("mousemove",(e)=>{
+
+      if(window.innerWidth < 850) return;
+
+      const rect =
+        card.getBoundingClientRect();
+
+      const x =
+        e.clientX - rect.left;
+
+      const y =
+        e.clientY - rect.top;
+
+      const rotateY =
+        ((x / rect.width) - .5) * 8;
+
+      const rotateX =
+        ((y / rect.height) - .5) * -8;
+
+      card.style.transform =
+        `perspective(800px)
+         rotateX(${rotateX}deg)
+         rotateY(${rotateY}deg)
+         translateY(-5px)`;
+
+    });
+
+    card.addEventListener("mouseleave",()=>{
+
+      card.style.transform="";
+
+    });
+
+  });
+
+
+/* ACTIVE NAV */
+
+const sections =
+  document.querySelectorAll("section");
+
+const links =
+  document.querySelectorAll(".nav-links a");
+
+window.addEventListener("scroll",()=>{
+
+  let current="home";
+
+  sections.forEach(section=>{
+
+    if(
+      window.scrollY >=
+      section.offsetTop - 250
+    ){
+
+      current=section.id;
+
+    }
+
+  });
+
+  links.forEach(link=>{
+
+    link.classList.toggle(
+      "active",
+      link.getAttribute("href") === "#"+current
     );
 
-    navLinks.forEach(
-      link => {
+  });
 
-        link.classList.toggle(
-          "active",
-          link.getAttribute("href") ===
-          "#" + current
-        );
-
-      }
-    );
-
-  }
-);
+});
 
 </script>
 
