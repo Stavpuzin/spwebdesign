@@ -7,23 +7,9 @@
 <title>STAV PUZIN — Web Design Studio</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
-:root{
-  --navy:#07101f;
-  --navy2:#0b1729;
-  --champagne:#d8c49a;
-  --silver:#dfe7f2;
-  --blue:#6c8cff;
-  --cyan:#6edfff;
-  --white:#f7f9fc;
-  --muted:#a8b4c8;
-}
 
 *{
   box-sizing:border-box;
-  margin:0;
-  padding:0;
 }
 
 html{
@@ -31,1561 +17,309 @@ html{
 }
 
 body{
-  background:#06101d;
-  color:var(--white);
-  font-family:Assistant,Arial,sans-serif;
+  margin:0;
+  background:#000;
+  color:#f4f0e8;
+  font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
 }
 
-/* =====================================================
-   LUXURY BACKGROUND
-===================================================== */
-
-.background{
-  position:fixed;
-  inset:0;
-  z-index:-10;
-  overflow:hidden;
-
-  background:
-    radial-gradient(
-      ellipse at 50% -10%,
-      #17345d 0%,
-      transparent 48%
-    ),
-    radial-gradient(
-      ellipse at 90% 45%,
-      #152b4c 0%,
-      transparent 40%
-    ),
-    radial-gradient(
-      ellipse at 5% 80%,
-      #10283f 0%,
-      transparent 42%
-    ),
-    #06101d;
+a{
+  color:inherit;
+  text-decoration:none;
 }
 
-/* elegant moving light */
 
-.light{
-  position:absolute;
-  width:800px;
-  height:300px;
+/* =========================
+   HEADER
+========================= */
 
-  border-radius:50%;
-
-  filter:blur(80px);
-
-  opacity:.23;
-
-  mix-blend-mode:screen;
-}
-
-.light.one{
-  top:-100px;
-  left:-200px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #bba879,
-      #6d8cff,
-      transparent
-    );
-
-  transform:rotate(-15deg);
-
-  animation:
-    lightOne 18s ease-in-out infinite alternate;
-}
-
-.light.two{
-  right:-250px;
-  top:30%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #789cff,
-      #d8c49a
-    );
-
-  transform:rotate(20deg);
-
-  animation:
-    lightTwo 21s ease-in-out infinite alternate;
-}
-
-.light.three{
-  left:-300px;
-  bottom:-150px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #6edfff,
-      #6c8cff,
-      transparent
-    );
-
-  animation:
-    lightThree 20s ease-in-out infinite alternate;
-}
-
-@keyframes lightOne{
-  from{
-    transform:
-      translate(-60px,-30px)
-      rotate(-15deg)
-      scale(1);
-  }
-
-  to{
-    transform:
-      translate(280px,150px)
-      rotate(8deg)
-      scale(1.15);
-  }
-}
-
-@keyframes lightTwo{
-  from{
-    transform:
-      translate(100px,-80px)
-      rotate(20deg);
-  }
-
-  to{
-    transform:
-      translate(-220px,140px)
-      rotate(-8deg)
-      scale(1.2);
-  }
-}
-
-@keyframes lightThree{
-  from{
-    transform:
-      translate(-80px,80px)
-      scale(1);
-  }
-
-  to{
-    transform:
-      translate(300px,-100px)
-      scale(1.25);
-  }
-}
-
-/* premium grid */
-
-.grid{
-  position:absolute;
-  inset:0;
-
-  background-image:
-    linear-gradient(#cbd7e712 1px,transparent 1px),
-    linear-gradient(90deg,#cbd7e712 1px,transparent 1px);
-
-  background-size:90px 90px;
-
-  mask-image:
-    radial-gradient(
-      ellipse at center,
-      black 0%,
-      transparent 72%
-    );
-
-  animation:
-    gridMove 24s linear infinite;
-}
-
-@keyframes gridMove{
-  from{
-    transform:translateY(0);
-  }
-
-  to{
-    transform:translateY(90px);
-  }
-}
-
-/* luxury line */
-
-.luxury-line{
-  position:absolute;
-
-  width:130%;
-  height:1px;
-
-  left:-15%;
-  top:43%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #d8c49a55,
-      #ffffff55,
-      #6c8cff55,
-      transparent
-    );
-
-  transform:rotate(-4deg);
-
-  box-shadow:
-    0 0 30px #d8c49a20;
-
-  animation:
-    lineMove 12s ease-in-out infinite alternate;
-}
-
-@keyframes lineMove{
-  from{
-    transform:
-      translateY(-30px)
-      rotate(-4deg);
-  }
-
-  to{
-    transform:
-      translateY(70px)
-      rotate(3deg);
-  }
-}
-
-/* particles */
-
-.particles{
-  position:absolute;
-  inset:0;
-}
-
-.particle{
-  position:absolute;
-
-  width:2px;
-  height:2px;
-
-  border-radius:50%;
-
-  background:#fff;
-
-  box-shadow:
-    0 0 10px #d8c49a,
-    0 0 20px #6c8cff;
-
-  opacity:var(--opacity);
-
-  animation:
-    particleFloat var(--time)
-    ease-in-out infinite alternate;
-}
-
-@keyframes particleFloat{
-  from{
-    transform:
-      translate3d(0,0,0)
-      scale(.7);
-  }
-
-  to{
-    transform:
-      translate3d(var(--x),var(--y),0)
-      scale(1.7);
-  }
-}
-
-/* vignette */
-
-.background:after{
-  content:"";
-
-  position:absolute;
-  inset:0;
-
-  background:
-    radial-gradient(
-      ellipse at center,
-      transparent 30%,
-      #020810a8 100%
-    );
-}
-
-/* =====================================================
-   CURSOR
-===================================================== */
-
-.cursor-glow{
-  position:fixed;
-
-  width:300px;
-  height:300px;
-
-  border-radius:50%;
-
-  pointer-events:none;
-
-  transform:translate(-50%,-50%);
-
-  background:
-    radial-gradient(
-      circle,
-      #d8c49a18,
-      #6c8cff10 35%,
-      transparent 70%
-    );
-
-  z-index:0;
-
-  mix-blend-mode:screen;
-}
-
-/* =====================================================
-   LOADER
-===================================================== */
-
-.loader{
-  position:fixed;
-  inset:0;
-
-  background:#06101d;
-
-  z-index:9999;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  flex-direction:column;
-
-  transition:
-    opacity 1s ease,
-    visibility 1s ease;
-}
-
-.loader.hide{
-  opacity:0;
-  visibility:hidden;
-}
-
-.loader-logo{
-  font:
-    700 clamp(38px,8vw,86px)
-    "Space Grotesk";
-
-  letter-spacing:-4px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #fff,
-      #d8c49a,
-      #fff,
-      #8ca6ff,
-      #fff
-    );
-
-  background-size:300%;
-
-  -webkit-background-clip:text;
-  color:transparent;
-
-  animation:
-    luxuryGradient 5s linear infinite;
-}
-
-@keyframes luxuryGradient{
-  to{
-    background-position:300%;
-  }
-}
-
-.loader-line{
-  width:190px;
-  height:1px;
-
-  margin-top:25px;
-
-  background:#ffffff18;
-
-  overflow:hidden;
-}
-
-.loader-line:after{
-  content:"";
-
-  display:block;
-
-  width:60%;
-  height:100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #d8c49a,
-      #fff,
-      #6c8cff,
-      transparent
-    );
-
-  animation:
-    loading 1.7s ease-in-out infinite;
-}
-
-@keyframes loading{
-  from{
-    transform:translateX(-190px);
-  }
-
-  to{
-    transform:translateX(320px);
-  }
-}
-
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-.nav{
-  position:fixed;
-
+header{
+  position:sticky;
   top:0;
-  left:0;
-  right:0;
+  z-index:1000;
 
-  height:78px;
+  height:76px;
 
-  padding:
-    0 6vw;
+  background:rgba(0,0,0,.92);
 
-  display:flex;
-
-  align-items:center;
-  justify-content:space-between;
-
-  background:
-    linear-gradient(
-      90deg,
-      #0c1828e8,
-      #101d2fe8,
-      #0b1727e8
-    );
-
-  backdrop-filter:blur(28px);
+  backdrop-filter:blur(14px);
 
   border-bottom:
-    1px solid #d8c49a22;
-
-  box-shadow:
-    0 10px 50px #0004;
-
-  z-index:100;
+    1px solid rgba(216,169,73,.35);
 }
 
-/* small logo */
+nav{
+  width:min(1100px,92%);
+  height:100%;
 
-.nav-logo{
-  width:58px;
-  height:58px;
+  margin:auto;
 
   display:flex;
-
   align-items:center;
-  justify-content:center;
 
-  cursor:pointer;
-
-  text-decoration:none;
+  gap:45px;
 }
 
-.nav-logo img{
-  width:50px;
-  height:50px;
+nav a{
+  height:100%;
 
-  object-fit:cover;
-
-  border-radius:50%;
-
-  display:block;
-
-  transition:
-    transform .35s ease,
-    filter .35s ease;
-
-  box-shadow:
-    0 0 12px #d8c49a35,
-    0 0 30px #6c8cff25;
-}
-
-.nav-logo:hover img{
-  transform:
-    scale(1.08);
-
-  filter:
-    drop-shadow(0 0 10px #d8c49a)
-    drop-shadow(0 0 22px #6c8cff);
-}
-
-.nav-logo.moving img{
-  animation:
-    logoSideMove .85s ease-in-out;
-}
-
-@keyframes logoSideMove{
-
-  0%{
-    transform:
-      translateX(0)
-      rotate(0);
-  }
-
-  20%{
-    transform:
-      translateX(-20px)
-      rotate(-7deg);
-  }
-
-  40%{
-    transform:
-      translateX(20px)
-      rotate(7deg);
-  }
-
-  60%{
-    transform:
-      translateX(-14px)
-      rotate(-5deg);
-  }
-
-  80%{
-    transform:
-      translateX(9px)
-      rotate(3deg);
-  }
-
-  100%{
-    transform:
-      translateX(0)
-      rotate(0);
-  }
-}
-
-.nav-links{
   display:flex;
-  gap:32px;
-}
-
-.nav-links a{
-  color:#aeb9ca;
-
-  text-decoration:none;
-
-  font-size:15px;
+  align-items:center;
 
   position:relative;
+
+  color:#d8d2c9;
+
+  font-size:16px;
 
   transition:.3s;
 }
 
-.nav-links a:after{
+nav a:hover{
+  color:#edc66c;
+}
+
+nav a.active{
+  color:#edc66c;
+}
+
+nav a.active:after{
   content:"";
 
   position:absolute;
 
+  left:0;
   right:0;
-  bottom:-8px;
-
-  width:0;
-  height:1px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #d8c49a,
-      #6c8cff
-    );
-
-  transition:.3s;
-}
-
-.nav-links a:hover,
-.nav-links a.active{
-  color:#fff;
-}
-
-.nav-links a:hover:after,
-.nav-links a.active:after{
-  width:100%;
-}
-
-/* progress */
-
-.progress{
-  position:fixed;
-
-  top:0;
-  right:0;
+  bottom:0;
 
   height:2px;
 
-  width:0;
-
-  background:
-    linear-gradient(
-      90deg,
-      #d8c49a,
-      #fff,
-      #6c8cff
-    );
-
-  z-index:500;
-}
-
-/* =====================================================
-   HERO
-===================================================== */
-
-.hero{
-  min-height:100vh;
-
-  position:relative;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  text-align:center;
-
-  padding:
-    145px 7vw
-    100px;
-
-  overflow:hidden;
-}
-
-.hero-content{
-  position:relative;
-
-  z-index:3;
-
-  max-width:1100px;
-}
-
-.kicker{
-  font:
-    700 11px
-    "Space Grotesk";
-
-  letter-spacing:5px;
-
-  color:#d8c49a;
-
-  margin-bottom:28px;
-}
-
-.hero h1{
-  font-size:
-    clamp(
-      55px,
-      9vw,
-      124px
-    );
-
-  line-height:.9;
-
-  letter-spacing:-6px;
-
-  text-shadow:
-    0 15px 60px #0009;
-}
-
-.gradient{
-  background:
-    linear-gradient(
-      90deg,
-      #fff 0%,
-      #d8c49a 22%,
-      #fff 43%,
-      #8ca6ff 70%,
-      #fff 100%
-    );
-
-  background-size:350%;
-
-  -webkit-background-clip:text;
-
-  color:transparent;
-
-  animation:
-    luxuryGradient 7s linear infinite;
-}
-
-.hero p{
-  max-width:700px;
-
-  margin:36px auto;
-
-  color:#bac5d6;
-
-  font-size:20px;
-
-  line-height:1.8;
-
-  text-shadow:
-    0 4px 25px #000;
-}
-
-.hero-buttons{
-  display:flex;
-
-  justify-content:center;
-
-  gap:15px;
-
-  flex-wrap:wrap;
-}
-
-/* buttons */
-
-.btn{
-  position:relative;
-
-  display:inline-flex;
-
-  align-items:center;
-  justify-content:center;
-
-  padding:
-    17px 30px;
-
-  border-radius:100px;
-
-  text-decoration:none;
-
-  font-weight:700;
-
-  transition:
-    transform .35s,
-    box-shadow .35s,
-    background .35s;
-
-  overflow:hidden;
-}
-
-.btn:before{
-  content:"";
-
-  position:absolute;
-
-  top:0;
-  bottom:0;
-
-  width:70px;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #fff7,
-      transparent
-    );
-
-  transform:
-    translateX(-120px)
-    skewX(-20deg);
-
-  transition:.7s;
-}
-
-.btn:hover:before{
-  transform:
-    translateX(350px)
-    skewX(-20deg);
-}
-
-.primary{
-  color:#08101b;
-
-  background:
-    linear-gradient(
-      110deg,
-      #d8c49a,
-      #f5ecd6,
-      #bba879
-    );
+  background:#e3b95e;
 
   box-shadow:
-    0 0 35px #d8c49a20,
-    inset 0 1px #fff;
+    0 0 12px #e3b95e,
+    0 0 25px rgba(227,185,94,.5);
 }
 
-.primary:hover{
-  transform:
-    translateY(-5px);
+.logo{
+  width:75px;
+  height:55px;
 
-  box-shadow:
-    0 15px 50px #d8c49a35;
+  object-fit:contain;
+
+  margin-right:auto;
 }
 
-.secondary{
-  color:#fff;
 
-  border:
-    1px solid #d8c49a35;
+/* =========================
+   GENERAL
+========================= */
 
-  background:
-    #ffffff08;
+main{
+  width:min(1100px,92%);
 
-  backdrop-filter:blur(15px);
+  margin:auto;
 }
-
-.secondary:hover{
-  transform:
-    translateY(-5px);
-
-  border-color:
-    #d8c49a75;
-
-  background:
-    #d8c49a0d;
-}
-
-/* scroll */
-
-.scroll{
-  position:absolute;
-
-  bottom:28px;
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:center;
-
-  gap:9px;
-
-  color:#8491a5;
-
-  font:
-    10px
-    "Space Grotesk";
-
-  letter-spacing:4px;
-}
-
-.mouse{
-  width:22px;
-  height:34px;
-
-  border:
-    1px solid #d8c49a50;
-
-  border-radius:20px;
-
-  position:relative;
-}
-
-.mouse:after{
-  content:"";
-
-  position:absolute;
-
-  width:3px;
-  height:7px;
-
-  background:#d8c49a;
-
-  border-radius:5px;
-
-  left:50%;
-  top:7px;
-
-  transform:
-    translateX(-50%);
-
-  animation:
-    mouse 1.7s infinite;
-}
-
-@keyframes mouse{
-
-  0%{
-    opacity:0;
-    transform:
-      translate(-50%,0);
-  }
-
-  30%{
-    opacity:1;
-  }
-
-  100%{
-    opacity:0;
-    transform:
-      translate(-50%,12px);
-  }
-}
-
-/* =====================================================
-   SECTIONS
-===================================================== */
 
 section{
-  position:relative;
-
   min-height:100vh;
-
-  padding:
-    135px 8vw;
 
   display:flex;
 
-  flex-direction:column;
-
-  justify-content:center;
-}
-
-.section-head{
-  max-width:900px;
-
-  margin-bottom:60px;
-}
-
-.section-head h2{
-  font-size:
-    clamp(
-      50px,
-      8vw,
-      100px
-    );
-
-  line-height:.9;
-
-  letter-spacing:-5px;
-
-  margin-top:10px;
-}
-
-.section-head p{
-  max-width:650px;
-
-  color:#aab6c9;
-
-  font-size:19px;
-
-  line-height:1.8;
-
-  margin-top:30px;
-}
-
-/* =====================================================
-   CARDS
-===================================================== */
-
-.cards{
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:20px;
-
-  max-width:1200px;
-
-  width:100%;
-}
-
-.card{
-  position:relative;
-
-  min-height:360px;
-
-  padding:35px;
-
-  border:
-    1px solid #d8c49a18;
-
-  border-radius:28px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #ffffff0c,
-      #ffffff03
-    );
-
-  backdrop-filter:blur(22px);
-
-  overflow:hidden;
-
-  transition:
-    transform .18s,
-    border-color .35s,
-    box-shadow .35s;
-
-  transform-style:preserve-3d;
-
-  box-shadow:
-    inset 0 1px #ffffff0c,
-    0 25px 80px #0006;
-}
-
-.card:before{
-  content:"";
-
-  position:absolute;
-
-  width:280px;
-  height:280px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      #d8c49a18,
-      #6c8cff10 40%,
-      transparent 70%
-    );
-
-  filter:blur(25px);
-
-  right:-140px;
-  top:-140px;
-
-  transition:.7s;
-}
-
-.card:after{
-  content:"";
-
-  position:absolute;
-
-  top:0;
-  left:0;
-
-  width:100%;
-  height:1px;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #d8c49a65,
-      transparent
-    );
-
-  opacity:.5;
-}
-
-.card:hover{
-  border-color:
-    #d8c49a55;
-
-  box-shadow:
-    0 35px 110px #0009,
-    0 0 45px #d8c49a0c;
-}
-
-.card:hover:before{
-  transform:
-    scale(1.5)
-    translate(-20px,20px);
-}
-
-.number{
-  font:
-    600 13px
-    "Space Grotesk";
-
-  color:#d8c49a;
-}
-
-.card h3{
-  font-size:34px;
-
-  margin-top:70px;
-
-  margin-bottom:15px;
-
-  position:relative;
-
-  z-index:2;
-}
-
-.card p{
-  color:#b2bdce;
-
-  font-size:17px;
-
-  line-height:1.8;
-
-  position:relative;
-
-  z-index:2;
-}
-
-.card-tag{
-  position:absolute;
-
-  bottom:30px;
-
-  color:#8e9bb0;
-
-  font:
-    10px
-    "Space Grotesk";
-
-  letter-spacing:3px;
-}
-
-/* =====================================================
-   PROCESS
-===================================================== */
-
-.process{
-  min-height:auto;
-}
-
-.process-line{
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:15px;
-
-  max-width:1200px;
-}
-
-.step{
-  padding:
-    30px 20px;
-
-  border-top:
-    1px solid #d8c49a22;
-
-  position:relative;
-
-  transition:.4s;
-}
-
-.step:hover{
-  border-top-color:
-    #d8c49a;
-
-  transform:
-    translateY(-7px);
-}
-
-.step-number{
-  font:
-    700 38px
-    "Space Grotesk";
-
-  color:#d8c49a;
-}
-
-.step h3{
-  margin-top:20px;
-
-  font-size:24px;
-}
-
-.step p{
-  margin-top:12px;
-
-  color:#99a6ba;
-
-  line-height:1.7;
-}
-
-/* =====================================================
-   CONTACT
-===================================================== */
-
-.contact{
-  min-height:90vh;
-}
-
-.contact-box{
-  position:relative;
-
-  overflow:hidden;
-
-  max-width:1200px;
-
-  width:100%;
-
-  padding:75px;
-
-  border-radius:40px;
-
-  border:
-    1px solid #d8c49a25;
-
-  background:
-    radial-gradient(
-      circle at 80% 20%,
-      #d8c49a12,
-      transparent 30%
-    ),
-    linear-gradient(
-      145deg,
-      #ffffff0d,
-      #ffffff03
-    );
-
-  backdrop-filter:blur(25px);
-
-  box-shadow:
-    0 35px 130px #0008;
-}
-
-.contact-box:before{
-  content:"";
-
-  position:absolute;
-
-  width:500px;
-  height:500px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      #6c8cff16,
-      transparent 65%
-    );
-
-  filter:blur(30px);
-
-  left:-200px;
-  bottom:-250px;
-
-  animation:
-    contactGlow 9s ease-in-out infinite alternate;
-}
-
-@keyframes contactGlow{
-  to{
-    transform:
-      translate(180px,-100px)
-      scale(1.25);
-  }
-}
-
-.contact-box h2{
-  font-size:
-    clamp(
-      55px,
-      8vw,
-      105px
-    );
-
-  line-height:.9;
-
-  letter-spacing:-5px;
-
-  position:relative;
-
-  z-index:2;
-}
-
-.contact-box p{
-  color:#abb7ca;
-
-  font-size:19px;
-
-  line-height:1.8;
-
-  max-width:650px;
-
-  margin:30px 0;
-
-  position:relative;
-
-  z-index:2;
-}
-
-.contact-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:15px;
-
-  margin-top:40px;
-
-  position:relative;
-
-  z-index:2;
-}
-
-.contact-card{
-  padding:27px;
-
-  border:
-    1px solid #ffffff14;
-
-  border-radius:20px;
-
-  background:#ffffff07;
-
-  backdrop-filter:blur(18px);
-
-  color:#fff;
-
-  text-decoration:none;
-
-  transition:.35s;
-}
-
-.contact-card:hover{
-  transform:
-    translateY(-8px);
-
-  border-color:
-    #d8c49a50;
-
-  background:
-    #d8c49a08;
-
-  box-shadow:
-    0 20px 60px #0008;
-}
-
-.contact-card small{
-  display:block;
-
-  color:#d8c49a;
-
-  font:
-    700 10px
-    "Space Grotesk";
-
-  letter-spacing:3px;
-
-  margin-bottom:12px;
-}
-
-.contact-card strong{
-  display:block;
-
-  font-size:19px;
-}
-
-.contact-card span{
-  display:block;
-
-  color:#7f8da3;
-
-  margin-top:8px;
-}
-
-/* =====================================================
-   FINAL LOGO
-===================================================== */
-
-.final{
-  min-height:auto;
-
-  padding:
-    100px 6vw
-    140px;
-
   align-items:center;
+  justify-content:center;
 
-  text-align:center;
+  padding:50px 0;
+
+  scroll-margin-top:76px;
 }
 
-.final-line{
+.section-image{
   width:100%;
 
-  height:1px;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #d8c49a,
-      #fff,
-      #6c8cff,
-      transparent
-    );
-
-  margin-bottom:80px;
-
-  box-shadow:
-    0 0 25px #d8c49a20;
-}
-
-.logo-center{
-  width:min(650px,90vw);
-
-  animation:
-    logoFloat 6s ease-in-out infinite;
-}
-
-.logo-center img{
-  width:100%;
+  height:auto;
 
   display:block;
 
-  border-radius:28px;
+  animation:
+    pageIn .8s ease both;
 
-  box-shadow:
-    0 0 45px #d8c49a18,
-    0 0 120px #6c8cff18;
+  filter:
+    drop-shadow(
+      0 0 25px
+      rgba(215,170,75,.08)
+    );
 }
 
-.final p{
-  margin-top:35px;
+@keyframes pageIn{
 
-  color:#728097;
+  from{
+    opacity:0;
 
-  font:
-    11px
-    "Space Grotesk";
+    transform:
+      translateY(25px);
+  }
 
-  letter-spacing:4px;
-}
+  to{
+    opacity:1;
 
-@keyframes logoFloat{
-
-  0%,100%{
     transform:
       translateY(0);
   }
 
-  50%{
+}
+
+
+/* =========================
+   GOLD LIGHT
+========================= */
+
+.light{
+  position:fixed;
+
+  inset:0;
+
+  pointer-events:none;
+
+  overflow:hidden;
+
+  z-index:900;
+}
+
+.light:after{
+
+  content:"";
+
+  position:absolute;
+
+  top:-10%;
+  left:-30%;
+
+  width:18%;
+  height:120%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,220,140,.08),
+      transparent
+    );
+
+  transform:
+    skewX(-18deg);
+
+  animation:
+    shine 8s ease-in-out infinite;
+}
+
+@keyframes shine{
+
+  0%,
+  65%{
+    left:-30%;
+    opacity:0;
+  }
+
+  72%{
+    opacity:1;
+  }
+
+  90%,
+  100%{
+    left:120%;
+    opacity:0;
+  }
+
+}
+
+
+/* =========================
+   GOLD PARTICLES
+========================= */
+
+.star{
+
+  position:fixed;
+
+  width:5px;
+  height:5px;
+
+  border-radius:50%;
+
+  background:#f1c96e;
+
+  box-shadow:
+    0 0 12px
+    4px rgba(241,201,110,.5);
+
+  pointer-events:none;
+
+  z-index:901;
+
+  animation:
+    pulse 3s
+    ease-in-out
+    infinite;
+}
+
+@keyframes pulse{
+
+  0%,
+  100%{
+    opacity:.1;
+
     transform:
-      translateY(-10px);
+      scale(.6);
   }
+
+  50%{
+    opacity:1;
+
+    transform:
+      scale(1.4);
+  }
+
 }
 
-/* =====================================================
-   REVEAL
-===================================================== */
 
-.reveal{
-  opacity:0;
-
-  transform:
-    translateY(45px);
-
-  transition:
-    opacity 1s ease,
-    transform 1s ease;
-}
-
-.reveal.visible{
-  opacity:1;
-
-  transform:
-    translateY(0);
-}
-
-/* =====================================================
+/* =========================
    MOBILE
-===================================================== */
+========================= */
 
-@media(max-width:850px){
+@media(max-width:700px){
 
-  .nav{
-    padding:
-      0 5vw;
+  header{
+    height:64px;
   }
 
-  .nav-logo{
-    width:48px;
-    height:48px;
+  nav{
+    gap:18px;
   }
 
-  .nav-logo img{
-    width:44px;
-    height:44px;
+  nav a{
+    font-size:13px;
   }
 
-  .nav-links{
-    gap:12px;
+  nav a:nth-child(2),
+  nav a:nth-child(3){
+    display:none;
   }
 
-  .nav-links a{
-    font-size:12px;
+  .logo{
+    width:62px;
   }
 
-  .hero{
-    padding:
-      130px 6vw
-      100px;
-  }
-
-  .hero h1{
-    font-size:58px;
-    letter-spacing:-3px;
-  }
-
-  .hero p{
-    font-size:17px;
+  main{
+    width:94%;
   }
 
   section{
+    min-height:auto;
+
     padding:
-      110px 6vw
-      80px;
-  }
-
-  .section-head h2{
-    font-size:58px;
-    letter-spacing:-3px;
-  }
-
-  .cards,
-  .process-line,
-  .contact-grid{
-    grid-template-columns:1fr;
-  }
-
-  .card{
-    min-height:300px;
-  }
-
-  .contact-box{
-    padding:
-      40px 25px;
-
-    border-radius:28px;
-  }
-
-  .contact-box h2{
-    font-size:58px;
-    letter-spacing:-3px;
-  }
-
-  .scroll{
-    display:none;
-  }
-
-  .cursor-glow{
-    display:none;
-  }
-
-  .light{
-    filter:blur(70px);
-  }
-
-  .grid{
-    background-size:
-      60px 60px;
+      30px 0;
   }
 
 }
@@ -1593,819 +327,293 @@ section{
 </style>
 </head>
 
+
 <body>
 
-<!-- =====================================================
-     BACKGROUND
-===================================================== -->
 
-<div class="background">
+<!-- =========================
+     HEADER
+========================= -->
 
-  <div class="light one"></div>
-  <div class="light two"></div>
-  <div class="light three"></div>
+<header>
 
-  <div class="grid"></div>
+<nav>
 
-  <div class="luxury-line"></div>
+<a
+href="#home"
+class="active"
+>
+ראשי
+</a>
 
-  <div class="particles">
+<a href="#services">
+שירותים
+</a>
 
-    <i class="particle"
-       style="top:12%;left:8%;--x:35px;--y:70px;--time:7s;--opacity:.7"></i>
+<a href="#process">
+תהליך עבודה
+</a>
 
-    <i class="particle"
-       style="top:20%;left:24%;--x:-40px;--y:55px;--time:9s;--opacity:.45"></i>
+<a href="#about">
+אודות
+</a>
 
-    <i class="particle"
-       style="top:14%;left:52%;--x:60px;--y:90px;--time:8s;--opacity:.65"></i>
+<a href="#contact">
+יצירת קשר
+</a>
 
-    <i class="particle"
-       style="top:30%;left:78%;--x:-55px;--y:45px;--time:10s;--opacity:.5"></i>
+<img
+src="logo.png"
+class="logo"
+alt="STAV PUZIN"
+>
 
-    <i class="particle"
-       style="top:42%;left:12%;--x:70px;--y:-35px;--time:8s;--opacity:.5"></i>
-
-    <i class="particle"
-       style="top:48%;left:42%;--x:-25px;--y:65px;--time:11s;--opacity:.65"></i>
-
-    <i class="particle"
-       style="top:58%;left:70%;--x:45px;--y:-70px;--time:9s;--opacity:.55"></i>
-
-    <i class="particle"
-       style="top:67%;left:30%;--x:-60px;--y:-45px;--time:10s;--opacity:.6"></i>
-
-    <i class="particle"
-       style="top:75%;left:85%;--x:-35px;--y:55px;--time:8s;--opacity:.45"></i>
-
-    <i class="particle"
-       style="top:84%;left:55%;--x:65px;--y:-55px;--time:12s;--opacity:.6"></i>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================================
-     LOADER
-===================================================== -->
-
-<div class="loader" id="loader">
-
-  <div class="loader-logo">
-    STAV PUZIN
-  </div>
-
-  <div class="loader-line"></div>
-
-</div>
-
-
-<div
-  class="cursor-glow"
-  id="cursorGlow"
-></div>
-
-
-<div
-  class="progress"
-  id="progress"
-></div>
-
-
-<!-- =====================================================
-     NAV
-===================================================== -->
-
-<header class="nav">
-
-  <a
-    href="#home"
-    class="nav-logo"
-    id="navLogo"
-    aria-label="STAV PUZIN"
-  >
-
-    <img
-      src="./logo.jpeg"
-      alt="STAV PUZIN"
-    >
-
-  </a>
-
-
-  <nav class="nav-links">
-
-    <a
-      href="#home"
-      class="active"
-    >
-      ראשי
-    </a>
-
-    <a href="#services">
-      השירותים
-    </a>
-
-    <a href="#process">
-      התהליך
-    </a>
-
-    <a href="#contact">
-      יצירת קשר
-    </a>
-
-  </nav>
+</nav>
 
 </header>
 
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+
+<!-- =========================
+     EFFECTS
+========================= -->
+
+<div class="light"></div>
+
+<div
+class="star"
+style="
+top:15%;
+left:8%;
+"
+></div>
+
+<div
+class="star"
+style="
+top:35%;
+left:91%;
+animation-delay:1s;
+"
+></div>
+
+<div
+class="star"
+style="
+top:58%;
+left:13%;
+animation-delay:1.7s;
+"
+></div>
+
+<div
+class="star"
+style="
+top:82%;
+left:84%;
+animation-delay:.6s;
+"
+></div>
+
+
+
+<!-- =========================
+     WEBSITE
+========================= -->
+
+<main>
+
+
+<!-- =========================
+     HOME
+========================= -->
 
 <section
-  class="hero"
-  id="home"
+id="home"
 >
 
-  <div class="hero-content reveal">
-
-    <div class="kicker">
-      WEB DESIGN • DEVELOPMENT • BRAND
-    </div>
-
-
-    <h1>
-
-      האתר שיגרום ללקוחות
-
-      <br>
-
-      <span class="gradient">
-        לבחור דווקא בעסק שלך.
-      </span>
-
-    </h1>
-
-
-    <p>
-
-      דפי נחיתה ואתרים לנשים ולגברים,
-      לעצמאים ולעסקים שרוצים להיראות מקצועיים,
-      למשוך תשומת לב ולהפוך גולשים ללקוחות.
-
-    </p>
-
-
-    <div class="hero-buttons">
-
-      <a
-        class="btn primary"
-        href="#contact"
-      >
-        בואו נבנה לכם אתר
-      </a>
-
-
-      <a
-        class="btn secondary"
-        href="#services"
-      >
-        להכיר את השירותים ↓
-      </a>
-
-    </div>
-
-  </div>
-
-
-  <div class="scroll">
-
-    SCROLL
-
-    <div class="mouse"></div>
-
-  </div>
+<img
+src="home.jpg"
+class="section-image"
+alt="STAV PUZIN — ראשי"
+>
 
 </section>
 
 
-<!-- =====================================================
+
+<!-- =========================
      SERVICES
-===================================================== -->
+========================= -->
 
-<section id="services">
+<section
+id="services"
+>
 
-  <div class="section-head reveal">
-
-    <div class="kicker">
-      WHAT I BUILD
-    </div>
-
-
-    <h2>
-
-      לא עוד אתר.
-
-      <br>
-
-      <span class="gradient">
-        חוויה.
-      </span>
-
-    </h2>
-
-
-    <p>
-
-      כל אתר נבנה מתוך מחשבה על הרושם הראשון,
-      על האנשים שיגיעו אליו ועל הפעולה שאנחנו רוצים
-      שהם יעשו.
-
-    </p>
-
-  </div>
-
-
-  <div class="cards">
-
-
-    <article class="card reveal">
-
-      <div class="number">
-        01
-      </div>
-
-      <h3>
-        דף נחיתה
-      </h3>
-
-      <p>
-        עמוד חד ומדויק שמציג את העסק שלך,
-        מספר את הסיפור ומוביל את המבקר לפעולה.
-      </p>
-
-      <div class="card-tag">
-        LANDING PAGE
-      </div>
-
-    </article>
-
-
-    <article class="card reveal">
-
-      <div class="number">
-        02
-      </div>
-
-      <h3>
-        אתר תדמית
-      </h3>
-
-      <p>
-        נוכחות דיגיטלית מלאה עם עיצוב ייחודי,
-        תוכן ברור וחוויית משתמש שמרגישה מקצועית.
-      </p>
-
-      <div class="card-tag">
-        BUSINESS WEBSITE
-      </div>
-
-    </article>
-
-
-    <article class="card reveal">
-
-      <div class="number">
-        03
-      </div>
-
-      <h3>
-        עיצוב אישי
-      </h3>
-
-      <p>
-        צבעים, אנימציות, טיפוגרפיה ואווירה
-        שנבנים במיוחד עבור המותג והלקוחות שלך.
-      </p>
-
-      <div class="card-tag">
-        CREATIVE DESIGN
-      </div>
-
-    </article>
-
-
-  </div>
+<img
+src="services.jpg"
+class="section-image"
+alt="השירותים שלי"
+>
 
 </section>
 
 
-<!-- =====================================================
+
+<!-- =========================
      PROCESS
-===================================================== -->
+========================= -->
 
 <section
-  class="process"
-  id="process"
+id="process"
 >
 
-  <div class="section-head reveal">
-
-    <div class="kicker">
-      THE PROCESS
-    </div>
-
-
-    <h2>
-
-      מרעיון
-
-      <br>
-
-      <span class="gradient">
-        לאתר חי.
-      </span>
-
-    </h2>
-
-  </div>
-
-
-  <div class="process-line">
-
-
-    <div class="step reveal">
-
-      <div class="step-number">
-        01
-      </div>
-
-      <h3>
-        מכירים
-      </h3>
-
-      <p>
-        מבינים את העסק, הקהל והכיוון שלך.
-      </p>
-
-    </div>
-
-
-    <div class="step reveal">
-
-      <div class="step-number">
-        02
-      </div>
-
-      <h3>
-        מעצבים
-      </h3>
-
-      <p>
-        יוצרים שפה ויזואלית שמתאימה בדיוק לך.
-      </p>
-
-    </div>
-
-
-    <div class="step reveal">
-
-      <div class="step-number">
-        03
-      </div>
-
-      <h3>
-        בונים
-      </h3>
-
-      <p>
-        הופכים את העיצוב לאתר מהיר ואינטראקטיבי.
-      </p>
-
-    </div>
-
-
-    <div class="step reveal">
-
-      <div class="step-number">
-        04
-      </div>
-
-      <h3>
-        משיקים
-      </h3>
-
-      <p>
-        האתר עולה לאוויר ומוכן להביא לקוחות.
-      </p>
-
-    </div>
-
-
-  </div>
+<img
+src="process.jpg"
+class="section-image"
+alt="תהליך העבודה"
+>
 
 </section>
 
 
-<!-- =====================================================
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section
+id="about"
+>
+
+<img
+src="about.jpg"
+class="section-image"
+alt="אודות"
+>
+
+</section>
+
+
+
+<!-- =========================
      CONTACT
-===================================================== -->
+========================= -->
 
 <section
-  class="contact"
-  id="contact"
+id="contact"
 >
 
-  <div class="contact-box reveal">
-
-    <div class="kicker">
-      LET'S TALK
-    </div>
-
-
-    <h2>
-
-      יש לך רעיון?
-
-      <br>
-
-      <span class="gradient">
-        בואו נבנה אותו.
-      </span>
-
-    </h2>
-
-
-    <p>
-
-      ספרו לי מה העסק שלכם צריך,
-      ונבנה יחד נוכחות דיגיטלית
-      שנראית טוב ומרגישה נכון.
-
-    </p>
-
-
-    <a
-      class="btn primary"
-      href="mailto:Stavpuzin@gmail.com"
-    >
-      מתחילים כאן ↗
-    </a>
-
-
-    <div class="contact-grid">
-
-
-      <a
-        class="contact-card"
-        href="tel:0549815445"
-      >
-
-        <small>
-          PHONE
-        </small>
-
-        <strong>
-          0549815445
-        </strong>
-
-        <span>
-          להתקשר ↗
-        </span>
-
-      </a>
-
-
-      <a
-        class="contact-card"
-        href="mailto:Stavpuzin@gmail.com"
-      >
-
-        <small>
-          EMAIL
-        </small>
-
-        <strong>
-          Stavpuzin@gmail.com
-        </strong>
-
-        <span>
-          לשלוח מייל ↗
-        </span>
-
-      </a>
-
-
-      <a
-        class="contact-card"
-        href="https://www.facebook.com/share/1B2YhJr8SM/?mibextid=wwXIfr"
-        target="_blank"
-        rel="noopener"
-      >
-
-        <small>
-          FACEBOOK
-        </small>
-
-        <strong>
-          Facebook
-        </strong>
-
-        <span>
-          לעמוד בפייסבוק ↗
-        </span>
-
-      </a>
-
-
-    </div>
-
-  </div>
+<img
+src="contact.jpg"
+class="section-image"
+alt="יצירת קשר"
+>
 
 </section>
 
 
-<!-- =====================================================
-     FINAL LOGO
-===================================================== -->
-
-<section class="final">
-
-  <div class="final-line"></div>
+</main>
 
 
-  <div class="logo-center reveal">
 
-    <img
-      src="./logo.jpeg"
-      alt="STAV PUZIN WEB DESIGN STUDIO"
-    >
-
-  </div>
-
-
-  <p>
-    WEBSITES • LANDING PAGES • ONLINE PRESENCE
-  </p>
-
-</section>
-
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
 <script>
 
-/* =====================================================
-   LOADER
-===================================================== */
+/* =========================
+   ACTIVE MENU
+========================= */
+
+const links =
+[
+  ...document.querySelectorAll(
+    "nav a"
+  )
+];
+
+
+const sections =
+[
+  ...document.querySelectorAll(
+    "main section"
+  )
+];
+
+
+const observer =
+new IntersectionObserver(
+
+  entries => {
+
+    entries.forEach(
+      entry => {
+
+        if(
+          entry.isIntersecting
+        ){
+
+          links.forEach(
+            link => {
+
+              link.classList.toggle(
+
+                "active",
+
+                link.getAttribute(
+                  "href"
+                )
+                ===
+                "#"
+                +
+                entry.target.id
+
+              );
+
+            }
+
+          );
+
+        }
+
+      }
+
+  },
+
+  {
+    threshold:.45
+  }
+
+);
+
+
+sections.forEach(
+  section =>
+    observer.observe(section)
+);
+
+
+/* =========================
+   PAGE LOAD
+========================= */
 
 window.addEventListener(
   "load",
   () => {
 
-    setTimeout(
+    document.body.style.opacity =
+      "0";
+
+    requestAnimationFrame(
       () => {
 
-        document
-          .getElementById("loader")
-          .classList
-          .add("hide");
-
-      },
-      1000
-    );
-
-  }
-);
-
-
-/* =====================================================
-   CURSOR
-===================================================== */
-
-const glow =
-  document.getElementById(
-    "cursorGlow"
-  );
-
-document.addEventListener(
-  "mousemove",
-  (e) => {
-
-    glow.style.left =
-      e.clientX + "px";
-
-    glow.style.top =
-      e.clientY + "px";
-
-  }
-);
-
-
-/* =====================================================
-   LOGO CLICK
-===================================================== */
-
-const navLogo =
-  document.getElementById(
-    "navLogo"
-  );
-
-navLogo.addEventListener(
-  "click",
-  function(){
-
-    this.classList.remove(
-      "moving"
-    );
-
-    void this.offsetWidth;
-
-    this.classList.add(
-      "moving"
-    );
-
-  }
-);
-
-
-/* =====================================================
-   SCROLL PROGRESS
-===================================================== */
-
-window.addEventListener(
-  "scroll",
-  () => {
-
-    const scrollTop =
-      window.scrollY;
-
-    const height =
-      document.documentElement
-        .scrollHeight -
-      window.innerHeight;
-
-    const percent =
-      (scrollTop / height) * 100;
-
-    document
-      .getElementById("progress")
-      .style.width =
-      percent + "%";
-
-  }
-);
-
-
-/* =====================================================
-   REVEAL
-===================================================== */
-
-const observer =
-  new IntersectionObserver(
-    (entries) => {
-
-      entries.forEach(
-        (entry) => {
-
-          if(
-            entry.isIntersecting
-          ){
-
-            entry.target
-              .classList
-              .add("visible");
-
-          }
-
-        }
-      );
-
-    },
-    {
-      threshold:.12
-    }
-  );
-
-
-document
-  .querySelectorAll(".reveal")
-  .forEach(
-    (el) =>
-      observer.observe(el)
-  );
-
-
-/* =====================================================
-   3D CARDS
-===================================================== */
-
-document
-  .querySelectorAll(".card")
-  .forEach(
-    (card) => {
-
-      card.addEventListener(
-        "mousemove",
-        (e) => {
-
-          if(
-            window.innerWidth < 850
-          ){
-            return;
-          }
-
-          const rect =
-            card.getBoundingClientRect();
-
-          const x =
-            e.clientX -
-            rect.left;
-
-          const y =
-            e.clientY -
-            rect.top;
-
-          const rotateY =
-            ((x / rect.width) - .5)
-            * 7;
-
-          const rotateX =
-            ((y / rect.height) - .5)
-            * -7;
-
-          card.style.transform =
-            `perspective(900px)
-             rotateX(${rotateX}deg)
-             rotateY(${rotateY}deg)
-             translateY(-6px)`;
-
-        }
-      );
-
-
-      card.addEventListener(
-        "mouseleave",
-        () => {
-
-          card.style.transform =
-            "";
-
-        }
-      );
-
-    }
-  );
-
-
-/* =====================================================
-   ACTIVE NAV
-===================================================== */
-
-const sections =
-  document.querySelectorAll(
-    "section"
-  );
-
-const links =
-  document.querySelectorAll(
-    ".nav-links a"
-  );
-
-window.addEventListener(
-  "scroll",
-  () => {
-
-    let current =
-      "home";
-
-    sections.forEach(
-      (section) => {
-
-        if(
-          window.scrollY >=
-          section.offsetTop - 250
-        ){
-
-          current =
-            section.id;
-
-        }
-
-      }
-    );
-
-
-    links.forEach(
-      (link) => {
-
-        link.classList.toggle(
-          "active",
-          link.getAttribute(
-            "href"
-          ) ===
-          "#" + current
-        );
+        document.body.style.transition =
+          "opacity .7s ease";
+
+        document.body.style.opacity =
+          "1";
 
       }
     );
@@ -2414,6 +622,7 @@ window.addEventListener(
 );
 
 </script>
+
 
 </body>
 </html>
