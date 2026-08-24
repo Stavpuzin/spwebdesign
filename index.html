@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>המסע אל עצמך</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F0D68A;
+    --gold-dark: #8B6914;
+    --cream: #FDF8F0;
+    --cream-dark: #F5EDD8;
+    --deep: #1A1208;
+    --text: #2D2010;
+    --text-muted: #6B5730;
+    --green-btn: #2E7D32;
+    --green-btn-hover: #1B5E20;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--deep);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(201,168,76,0.10) 0%, transparent 60%),
+      linear-gradient(160deg, #1A1208 0%, #2B1F08 40%, #1A1208 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(201,168,76,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .ornament {
+    font-family: 'Frank Ruhl Libre', serif;
+    color: var(--gold);
+    font-size: 1.1rem;
+    letter-spacing: 0.35em;
+    opacity: 0.7;
+    text-transform: uppercase;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: clamp(3.2rem, 9vw, 7rem);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.05;
+    margin: 20px 0 10px;
+    animation: fadeUp 0.9s ease 0.1s both;
+  }
+
+  .hero-title span {
+    color: var(--gold);
+  }
+
+  .hero-tag {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--gold-light);
+    letter-spacing: 0.08em;
+    margin-bottom: 36px;
+    animation: fadeUp 0.9s ease 0.2s both;
+  }
+
+  .divider-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 36px;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+
+  .hero-intro {
+    font-family: 'Heebo', sans-serif;
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    font-weight: 300;
+    color: rgba(253,248,240,0.78);
+    line-height: 1.9;
+    max-width: 680px;
+    margin: 0 auto 44px;
+    animation: fadeUp 1s ease 0.35s both;
+  }
+
+  .hero-cta-text {
+    font-size: 1rem;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    font-weight: 400;
+    animation: fadeUp 1s ease 0.45s both;
+  }
+
+  .btn-green {
+    display: inline-block;
+    background: var(--green-btn);
+    color: #fff;
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    padding: 16px 52px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    box-shadow: 0 8px 32px rgba(46,125,50,0.35);
+    transition: all 0.25s ease;
+    animation: fadeUp 1s ease 0.5s both, pulse 2.5s ease 1.5s infinite;
+  }
+
+  .btn-green:hover {
+    background: var(--green-btn-hover);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 12px 40px rgba(46,125,50,0.45);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(201,168,76,0.5);
+    font-size: 1.5rem;
+    animation: bounce 2s ease infinite;
+  }
+
+  /* ── CARDS SECTION ── */
+  .cards-section {
+    background: var(--cream);
+    padding: 90px 24px;
+    overflow: hidden;
+  }
+
+  .section-label {
+    text-align: center;
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .cards-section .section-label {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    color: var(--deep);
+    letter-spacing: 0;
+    text-transform: none;
+    margin-bottom: 50px;
+  }
+
+  .section-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    text-align: center;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 60px;
+  }
+
+  .cards-track-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cards-track {
+    display: flex;
+    gap: 28px;
+    width: max-content;
+    animation: scrollCards 40s linear infinite;
+  }
+
+  .cards-track:hover { animation-play-state: paused; }
+
+  .card {
+    background: var(--white);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 20px;
+    padding: 40px 32px;
+    width: 300px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle at top right, rgba(201,168,76,0.12), transparent 70%);
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(139,105,20,0.15);
+  }
+
+  .card-icon {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .card-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+
+  .card-text {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+
+  .card-accent {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 4px; height: 50%;
+    background: linear-gradient(180deg, transparent, var(--gold));
+    border-radius: 4px 0 0 0;
+  }
+
+  /* ── FAQ SECTION ── */
+  .faq-section {
+    background: linear-gradient(160deg, #1A1208 0%, #231908 100%);
+    padding: 90px 24px;
+  }
+
+  .faq-section .section-title { color: var(--cream); }
+  .faq-section .section-label { color: var(--gold); }
+
+  .faq-list {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .faq-item {
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    background: rgba(255,255,255,0.03);
+    transition: border-color 0.3s ease;
+  }
+
+  .faq-item.open { border-color: rgba(201,168,76,0.4); }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 28px;
+    cursor: pointer;
+    user-select: none;
+    gap: 16px;
+  }
+
+  .faq-question-text {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--cream);
+    line-height: 1.4;
+  }
+
+  .faq-plus {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    color: var(--gold);
+    font-size: 1.3rem;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  .faq-item.open .faq-plus {
+    background: var(--gold);
+    color: var(--deep);
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 28px;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 200px;
+    padding: 0 28px 24px;
+  }
+
+  .faq-answer-text {
+    font-size: 0.97rem;
+    color: rgba(253,248,240,0.7);
+    line-height: 1.8;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    padding-top: 16px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--deep);
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 0.85rem;
+    color: rgba(201,168,76,0.4);
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(8px); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 8px 32px rgba(46,125,50,0.35); }
+    50%       { box-shadow: 0 8px 48px rgba(46,125,50,0.6); }
+  }
+
+  @keyframes scrollCards {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 600px) {
+    .hero-title { font-size: 2.8rem; }
+    .hero-intro { font-size: 0.95rem; }
+    .btn-green { padding: 14px 38px; font-size: 1rem; }
+    .card { width: 270px; padding: 32px 24px; }
+    .faq-question { padding: 18px 20px; }
+    .faq-answer { padding: 0 20px; }
+    .faq-item.open .faq-answer { padding: 0 20px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero">
+  <p class="ornament">ספר דיגיטלי</p>
+
+  <h1 class="hero-title">המסע<br><span>אל עצמך</span></h1>
+
+  <p class="hero-tag">ספר דיגיטלי קצר שמתאים לכולם</p>
+
+  <div class="divider-line"></div>
+
+  <p class="hero-intro">
+    החיים שלנו הם שילוב תמידי של מחשבה, רגש, פעולה ונשמה. לעיתים נדמה שהם סבוכים, מלאי קונפליקטים פנימיים, ואנחנו לא תמיד יודעים איך לנווט בהם.
+    <br><br>
+    בספר הזה תגלו את הכלים להבין את עצמכם טוב יותר, להקשיב לקול הפנימי, לקבל את רגשותיכם, להתמודד עם פחדים ומכשולים, ולהתחבר לנשמה שלכם. כל פרק הוא מסע – מהכרת הקונפליקטים בין המוח ללב, דרך קבלה עצמית, התמודדות עם כישלונות, ועד למצוא שמחה פנימית אמיתית.
+    <br><br>
+    המסע הזה נועד להזכיר לכם: אתם לא צריכים להילחם בעצמכם. אתם יכולים לגלות שקט פנימי, אהבה עצמית, ושמחת חיים – כבר כאן, בתוככם.
+  </p>
+
+  <p class="hero-cta-text">התחל את המסע שלך עכשיו – הורד את הספר והתחבר לעצמך</p>
+
+  <a href="#" class="btn-green" onclick="openPaypal(event)">🌿 אני רוצה את הספר</a>
+
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ════════ CARDS ════════ -->
+<section class="cards-section">
+  <p class="section-label">מה תגלו בספר</p>
+
+  <div class="cards-track-wrapper">
+    <div class="cards-track" id="cardsTrack">
+      <!-- original 3 -->
+      <div class="card">
+        <span class="card-icon">🌸</span>
+        <h3 class="card-title">אהבה עצמית שמתחילה מבפנים</h3>
+        <p class="card-text">תלמדו לראות את עצמכם באהבה ובחמלה, לשחרר ביקורת עצמית ולאמץ את מי שאתם באמת – עם כל הכוחות והחולשות.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">🦋</span>
+        <h3 class="card-title">המהפך שתמיד חיכיתם לו</h3>
+        <p class="card-text">כל שינוי מתחיל ברגע של בחירה. הספר ילווה אתכם צעד אחר צעד לקראת גרסה מחודשת, חופשית ואמיתית יותר של עצמכם.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">✨</span>
+        <h3 class="card-title">התפתחות אישית שלא עוצרת</h3>
+        <p class="card-text">כלים מעשיים להבין דפוסים ישנים, לשחרר פחדים ולצמוח בכל תחום בחיים – בקשרים, בקריירה, ובנפש.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <!-- duplicated for infinite scroll -->
+      <div class="card">
+        <span class="card-icon">🌸</span>
+        <h3 class="card-title">אהבה עצמית שמתחילה מבפנים</h3>
+        <p class="card-text">תלמדו לראות את עצמכם באהבה ובחמלה, לשחרר ביקורת עצמית ולאמץ את מי שאתם באמת – עם כל הכוחות והחולשות.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">🦋</span>
+        <h3 class="card-title">המהפך שתמיד חיכיתם לו</h3>
+        <p class="card-text">כל שינוי מתחיל ברגע של בחירה. הספר ילווה אתכם צעד אחר צעד לקראת גרסה מחודשת, חופשית ואמיתית יותר של עצמכם.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">✨</span>
+        <h3 class="card-title">התפתחות אישית שלא עוצרת</h3>
+        <p class="card-text">כלים מעשיים להבין דפוסים ישנים, לשחרר פחדים ולצמוח בכל תחום בחיים – בקשרים, בקריירה, ובנפש.</p>
+        <div class="card-accent"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FAQ ════════ -->
+<section class="faq-section">
+  <p class="section-label">שאלות נפוצות</p>
+  <h2 class="section-title">כל מה שרציתם לדעת</h2>
+
+  <div class="faq-list">
+
+    <div class="faq-item" data-index="0">
+      <div class="faq-question" onclick="toggleFaq(0)">
+        <span class="faq-question-text">איפה הספר מופיע לאחר הרכישה?</span>
+        <div class="faq-plus">+</div>
+      </div>
+      <div class="faq-answer">
+        <p class="faq-answer-text">מיד לאחר התשלום תועברו לדף בו הספר נמצא ותוכלו להוריד אותו מיד. אין צורך להמתין – הגישה מיידית!</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-index="1">
+      <div class="faq-question" onclick="toggleFaq(1)">
+        <span class="faq-question-text">למי מתאים הספר?</span>
+        <div class="faq-plus">+</div>
+      </div>
+      <div class="faq-answer">
+        <p class="faq-answer-text">לכולם! לכל מי שמרגיש שהוא רוצה להתפתח אישית, חיזוק הביטחון העצמי והיכרות עמוקה יותר עם עצמו. אין דרישות מוקדמות – רק רצון אמיתי לגדול.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-index="2">
+      <div class="faq-question" onclick="toggleFaq(2)">
+        <span class="faq-question-text">האם הספר מתאים לאייפון ולמכשירים אחרים?</span>
+        <div class="faq-plus">+</div>
+      </div>
+      <div class="faq-answer">
+        <p class="faq-answer-text">כן! הספר מותאם לכל המכשירים – אייפון, אנדרואיד, מחשב, טאבלט ועוד. תוכלו לקרוא אותו בכל מקום ובכל זמן.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center; margin-top: 52px;">
+    <a href="#" class="btn-green" onclick="openPaypal(event)">🌿 אני רוצה את הספר</a>
+  </div>
+</section>
+
+<!-- ════════ PAYPAL MODAL ════════ -->
+<div id="paypal-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:1000; align-items:center; justify-content:center;">
+  <div style="background:#fff; border-radius:20px; padding:40px 32px; max-width:480px; width:90%; position:relative; text-align:center;">
+    <button onclick="closePaypal()" style="position:absolute; top:14px; left:18px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#888; line-height:1;">×</button>
+    <p style="font-family:'Frank Ruhl Libre',serif; font-size:1.4rem; font-weight:700; color:#1A1208; margin-bottom:8px;">המסע אל עצמך</p>
+    <p style="font-size:0.9rem; color:#888; margin-bottom:24px;">השלם את הרכישה בבטחה דרך PayPal</p>
+    <div id="paypal-container-UG3G9PK9VJJZC"></div>
+  </div>
+</div>
+
+<!-- ════════ FOOTER ════════ -->
+<footer class="footer">
+  <p>© 2025 המסע אל עצמך · כל הזכויות שמורות</p>
+</footer>
+
+<script src="https://www.paypal.com/sdk/js?client-id=BAACWrOZGBoLDlPBXPGGah4srdcZqNI2VoSQtQs9DrRk-S1ifsfeNGGApOqMRaiXABp7mFamWVbGNc_4lw&components=hosted-buttons&disable-funding=venmo&currency=ILS"></script>
+
+<script>
+  var paypalRendered = false;
+
+  function openPaypal(e) {
+    if (e) e.preventDefault();
+    document.getElementById('paypal-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    if (!paypalRendered) {
+      paypal.HostedButtons({ hostedButtonId: "UG3G9PK9VJJZC" }).render("#paypal-container-UG3G9PK9VJJZC");
+      paypalRendered = true;
+    }
+  }
+
+  function closePaypal() {
+    document.getElementById('paypal-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('paypal-modal').addEventListener('click', function(e) {
+    if (e.target === this) closePaypal();
+  });
+
+  function toggleFaq(index) {
+    const items = document.querySelectorAll('.faq-item');
+    const item = items[index];
+    const isOpen = item.classList.contains('open');
+    items.forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+</body>
+</html>
