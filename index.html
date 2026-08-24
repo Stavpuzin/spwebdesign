@@ -2,15 +2,11 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>STAV PUZIN — Web Design Studio</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 html{
   scroll-behavior:smooth;
@@ -19,38 +15,106 @@ html{
 body{
   margin:0;
   background:#000;
-  color:#f4f0e8;
-  font-family:Arial,Helvetica,sans-serif;
+  color:#fff;
+  font-family:Arial,"Heebo",sans-serif;
   overflow-x:hidden;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
+/* ===== GOLD BACKGROUND ===== */
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-2;
+
+  background:
+    radial-gradient(
+      circle at 75% 20%,
+      rgba(220,175,75,.13),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 10% 80%,
+      rgba(220,175,75,.08),
+      transparent 30%
+    ),
+    #000;
 }
 
+/* ===== GOLD LIGHT ===== */
 
-/* =========================
-   HEADER
-========================= */
+.light{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1000;
+  overflow:hidden;
+}
+
+.light:after{
+  content:"";
+
+  position:absolute;
+  top:-20%;
+  left:-30%;
+
+  width:18%;
+  height:140%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,220,140,.10),
+      transparent
+    );
+
+  transform:skewX(-18deg);
+
+  animation:
+    lightMove 9s ease-in-out infinite;
+}
+
+@keyframes lightMove{
+
+  0%,65%{
+    left:-30%;
+    opacity:0;
+  }
+
+  72%{
+    opacity:1;
+  }
+
+  92%,100%{
+    left:120%;
+    opacity:0;
+  }
+}
+
+/* ===== NAVIGATION ===== */
 
 header{
   position:sticky;
   top:0;
-  z-index:1000;
+  z-index:500;
 
   height:76px;
 
-  background:rgba(0,0,0,.92);
+  background:
+    rgba(0,0,0,.92);
 
-  backdrop-filter:blur(14px);
+  backdrop-filter:blur(15px);
 
   border-bottom:
-    1px solid rgba(216,169,73,.35);
+    1px solid
+    rgba(220,175,75,.35);
 }
 
 nav{
-  width:min(1100px,92%);
+  width:min(1180px,92%);
   height:100%;
 
   margin:auto;
@@ -58,7 +122,7 @@ nav{
   display:flex;
   align-items:center;
 
-  gap:45px;
+  gap:42px;
 }
 
 nav a{
@@ -71,17 +135,16 @@ nav a{
 
   color:#d8d2c9;
 
+  text-decoration:none;
+
   font-size:16px;
 
   transition:.3s;
 }
 
-nav a:hover{
-  color:#edc66c;
-}
-
+nav a:hover,
 nav a.active{
-  color:#edc66c;
+  color:#eac36b;
 }
 
 nav a.active:after{
@@ -89,210 +152,666 @@ nav a.active:after{
 
   position:absolute;
 
+  bottom:0;
   left:0;
   right:0;
-  bottom:0;
 
   height:2px;
 
-  background:#e3b95e;
+  background:#eac36b;
 
   box-shadow:
-    0 0 12px #e3b95e,
-    0 0 25px rgba(227,185,94,.5);
+    0 0 14px #eac36b;
 }
 
 .logo{
-  width:75px;
-  height:55px;
-
-  object-fit:contain;
-
   margin-right:auto;
+
+  font-family:Georgia,serif;
+
+  font-size:46px;
+
+  letter-spacing:-8px;
+
+  color:#aaa;
+
+  text-shadow:
+    0 0 15px
+    rgba(255,220,140,.15);
 }
 
-
-/* =========================
-   GENERAL
-========================= */
-
-main{
-  width:min(1100px,92%);
-
-  margin:auto;
-}
+/* ===== SECTIONS ===== */
 
 section{
+  width:min(1180px,92%);
+
   min-height:100vh;
+
+  margin:auto;
+
+  padding:
+    100px 0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ===== HERO ===== */
+
+.hero{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:40px;
+
+  align-items:center;
+}
+
+.eyebrow{
+  color:#d9ae55;
+
+  letter-spacing:3px;
+
+  font-size:14px;
+
+  margin-bottom:20px;
+}
+
+h1{
+  margin:0;
+
+  font-size:
+    clamp(45px,5vw,76px);
+
+  line-height:1.05;
+
+  font-weight:400;
+}
+
+h1 span{
+  color:#d6a84d;
+}
+
+.hero-text p{
+  color:#c8c1b8;
+
+  font-size:19px;
+
+  line-height:1.8;
+
+  max-width:590px;
+
+  margin:
+    30px 0;
+}
+
+.divider{
+  width:270px;
+
+  height:1px;
+
+  margin:
+    25px auto;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #d8ad57,
+      transparent
+    );
+
+  position:relative;
+}
+
+.divider:after{
+  content:"✦";
+
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:
+    translate(-50%,-50%);
+
+  background:#000;
+
+  color:#eac36b;
+
+  padding:0 10px;
+}
+
+/* ===== BUTTONS ===== */
+
+.buttons{
+  display:flex;
+
+  gap:15px;
+
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-flex;
+
+  align-items:center;
+  justify-content:center;
+
+  min-width:185px;
+
+  padding:
+    15px 24px;
+
+  border-radius:5px;
+
+  border:
+    1px solid
+    #8d672b;
+
+  color:#e9c16b;
+
+  background:#050505;
+
+  transition:.3s;
+}
+
+.btn:hover{
+  transform:translateY(-4px);
+
+  box-shadow:
+    0 10px 30px
+    rgba(220,175,75,.15);
+}
+
+.btn.gold{
+  color:#080808;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ad7e2d,
+      #efc96d
+    );
+}
+
+/* ===== SP HERO ===== */
+
+.hero-logo{
+  position:relative;
+
+  min-height:500px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+}
+
+.big-sp{
+  font-family:Georgia,serif;
+
+  font-size:
+    clamp(190px,25vw,350px);
+
+  line-height:.65;
+
+  color:#101010;
+
+  -webkit-text-stroke:
+    1px #8e8b84;
+
+  text-shadow:
+    0 0 35px
+    rgba(255,220,140,.12);
+}
+
+.laptop{
+  position:absolute;
+
+  width:270px;
+  height:180px;
+
+  bottom:70px;
+  right:12%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #080808,
+      #29251d
+    );
+
+  border:
+    2px solid
+    #666158;
+
+  border-radius:8px;
+
+  transform:
+    rotate(-10deg);
+
+  box-shadow:
+    0 25px 50px #000;
+}
+
+.laptop:after{
+  content:"";
+
+  position:absolute;
+
+  left:-25px;
+  right:-25px;
+  bottom:-18px;
+
+  height:18px;
+
+  background:#151515;
+
+  border:
+    2px solid
+    #666158;
+
+  border-radius:
+    0 0 12px 12px;
+}
+
+.apple{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:
+    translate(-50%,-50%);
+
+  font-size:35px;
+
+  color:#d8c291;
+}
+
+/* ===== SERVICES ===== */
+
+.section-title{
+  width:100%;
+
+  text-align:center;
+
+  color:#e3b661;
+
+  font-size:43px;
+
+  font-weight:400;
+
+  margin:0;
+}
+
+.cards{
+  width:100%;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:22px;
+
+  margin-top:50px;
+}
+
+.card{
+  position:relative;
+
+  min-height:330px;
+
+  padding:35px 28px;
+
+  text-align:center;
+
+  border:
+    1px solid
+    rgba(210,163,70,.5);
+
+  border-radius:15px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10,10,10,.95),
+      rgba(2,2,2,.8)
+    );
+
+  transition:.4s;
+
+  overflow:hidden;
+}
+
+.card:hover{
+  transform:
+    translateY(-10px);
+
+  border-color:#eac36b;
+
+  box-shadow:
+    0 20px 45px
+    rgba(0,0,0,.7),
+    0 0 25px
+    rgba(220,175,75,.12);
+}
+
+.icon{
+  width:78px;
+  height:78px;
+
+  margin:
+    0 auto 25px;
+
+  border:
+    1px solid
+    #a67b32;
+
+  border-radius:50%;
 
   display:flex;
 
   align-items:center;
   justify-content:center;
 
-  padding:50px 0;
+  color:#eac36b;
 
-  scroll-margin-top:76px;
+  font-size:32px;
 }
 
-.section-image{
+.card h3{
+  font-size:27px;
+
+  font-weight:400;
+
+  margin:
+    0 0 15px;
+}
+
+.card p{
+  color:#c5beb5;
+
+  line-height:1.8;
+
+  font-size:16px;
+}
+
+.number{
+  position:absolute;
+
+  bottom:18px;
+  left:22px;
+
+  color:#b68a43;
+
+  font-size:16px;
+}
+
+/* ===== PROCESS ===== */
+
+.process{
   width:100%;
 
-  height:auto;
+  display:grid;
 
-  display:block;
+  grid-template-columns:
+    repeat(4,1fr);
 
-  animation:
-    pageIn .8s ease both;
+  gap:10px;
 
-  filter:
-    drop-shadow(
-      0 0 25px
-      rgba(215,170,75,.08)
-    );
+  margin-top:55px;
 }
 
-@keyframes pageIn{
+.step{
+  text-align:center;
 
-  from{
-    opacity:0;
-
-    transform:
-      translateY(25px);
-  }
-
-  to{
-    opacity:1;
-
-    transform:
-      translateY(0);
-  }
-
+  position:relative;
 }
 
+.step-icon{
+  width:84px;
+  height:84px;
 
-/* =========================
-   GOLD LIGHT
-========================= */
+  margin:auto;
 
-.light{
-  position:fixed;
+  display:flex;
 
-  inset:0;
+  align-items:center;
+  justify-content:center;
 
-  pointer-events:none;
+  border:
+    1px solid
+    #e0b75c;
 
-  overflow:hidden;
+  border-radius:50%;
 
-  z-index:900;
+  background:#000;
+
+  color:#eac36b;
+
+  font-size:30px;
+
+  position:relative;
+
+  z-index:2;
 }
 
-.light:after{
-
+.step:not(:last-child):after{
   content:"";
 
   position:absolute;
 
-  top:-10%;
-  left:-30%;
+  top:42px;
 
-  width:18%;
-  height:120%;
+  left:-50%;
+
+  width:100%;
+
+  height:1px;
 
   background:
     linear-gradient(
       90deg,
       transparent,
-      rgba(255,220,140,.08),
+      #d7a947,
       transparent
     );
+}
+
+.step-number{
+  color:#e5b95d;
+
+  margin-top:14px;
+
+  font-size:18px;
+}
+
+.step h3{
+  font-size:22px;
+
+  font-weight:400;
+}
+
+.step p{
+  color:#bfb8ae;
+
+  line-height:1.7;
+
+  max-width:190px;
+
+  margin:auto;
+}
+
+/* ===== CONTACT ===== */
+
+.contact-box{
+  width:100%;
+
+  padding:40px;
+
+  border:
+    1px solid
+    rgba(210,163,70,.55);
+
+  border-radius:16px;
+
+  background:
+    rgba(5,5,5,.8);
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 2fr;
+
+  gap:30px;
+
+  align-items:center;
+}
+
+.contact-text h2{
+  color:#e3b661;
+
+  font-size:43px;
+
+  font-weight:400;
+
+  margin:0 0 10px;
+}
+
+.contact-text p{
+  color:#c8c1b8;
+
+  font-size:17px;
+
+  line-height:1.8;
+}
+
+.contact-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:15px;
+}
+
+.contact-card{
+  min-height:155px;
+
+  border:
+    1px solid
+    rgba(178,133,52,.5);
+
+  border-radius:10px;
+
+  padding:22px 10px;
+
+  text-align:center;
+
+  transition:.3s;
+}
+
+.contact-card:hover{
+  transform:
+    translateY(-5px);
+
+  border-color:#eac36b;
+}
+
+.contact-icon{
+  font-size:30px;
+
+  color:#eac36b;
+
+  margin-bottom:12px;
+}
+
+.contact-card strong{
+  display:block;
+
+  font-size:16px;
+
+  margin-bottom:8px;
+}
+
+.contact-card span{
+  color:#bcb5ab;
+
+  font-size:14px;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+  text-align:center;
+
+  padding:
+    80px 0 60px;
+}
+
+.footer-sp{
+  font-family:Georgia,serif;
+
+  font-size:115px;
+
+  line-height:.7;
+
+  color:#111;
+
+  -webkit-text-stroke:
+    1px #888;
+}
+
+.footer-name{
+  font-family:Georgia,serif;
+
+  font-size:43px;
+
+  letter-spacing:6px;
+
+  color:#aaa;
+}
+
+.footer-sub{
+  margin-top:15px;
+
+  color:#d6ad5a;
+
+  letter-spacing:5px;
+
+  font-size:13px;
+}
+
+/* ===== REVEAL ===== */
+
+.reveal{
+  opacity:0;
 
   transform:
-    skewX(-18deg);
+    translateY(25px);
 
-  animation:
-    shine 8s ease-in-out infinite;
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
 }
 
-@keyframes shine{
+.reveal.show{
+  opacity:1;
 
-  0%,
-  65%{
-    left:-30%;
-    opacity:0;
-  }
-
-  72%{
-    opacity:1;
-  }
-
-  90%,
-  100%{
-    left:120%;
-    opacity:0;
-  }
-
+  transform:
+    translateY(0);
 }
 
+/* ===== MOBILE ===== */
 
-/* =========================
-   GOLD PARTICLES
-========================= */
-
-.star{
-
-  position:fixed;
-
-  width:5px;
-  height:5px;
-
-  border-radius:50%;
-
-  background:#f1c96e;
-
-  box-shadow:
-    0 0 12px
-    4px rgba(241,201,110,.5);
-
-  pointer-events:none;
-
-  z-index:901;
-
-  animation:
-    pulse 3s
-    ease-in-out
-    infinite;
-}
-
-@keyframes pulse{
-
-  0%,
-  100%{
-    opacity:.1;
-
-    transform:
-      scale(.6);
-  }
-
-  50%{
-    opacity:1;
-
-    transform:
-      scale(1.4);
-  }
-
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:700px){
-
-  header{
-    height:64px;
-  }
+@media(max-width:850px){
 
   nav{
     gap:18px;
@@ -302,47 +821,98 @@ section{
     font-size:13px;
   }
 
+  .hero{
+    grid-template-columns:1fr;
+
+    text-align:center;
+  }
+
+  .hero-text p{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .buttons{
+    justify-content:center;
+  }
+
+  .hero-logo{
+    min-height:360px;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .process{
+    grid-template-columns:
+      1fr 1fr;
+
+    gap:40px 10px;
+  }
+
+  .step:not(:last-child):after{
+    display:none;
+  }
+
+  .contact-box{
+    grid-template-columns:1fr;
+
+    text-align:center;
+  }
+
+  .contact-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:560px){
+
+  nav{
+    width:96%;
+
+    gap:12px;
+  }
+
   nav a:nth-child(2),
   nav a:nth-child(3){
     display:none;
   }
 
   .logo{
-    width:62px;
-  }
-
-  main{
-    width:94%;
+    font-size:35px;
   }
 
   section{
-    min-height:auto;
+    width:94%;
 
     padding:
-      30px 0;
+      70px 0;
   }
 
-}
+  h1{
+    font-size:43px;
+  }
 
+  .process{
+    grid-template-columns:1fr;
+  }
+
+  .footer-name{
+    font-size:30px;
+  }
+}
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =========================
-     HEADER
-========================= -->
+<div class="light"></div>
 
 <header>
-
 <nav>
 
-<a
-href="#home"
-class="active"
->
+<a href="#home" class="active">
 ראשי
 </a>
 
@@ -362,267 +932,521 @@ class="active"
 יצירת קשר
 </a>
 
-<img
-src="logo.png"
-class="logo"
-alt="STAV PUZIN"
->
+<div class="logo">
+SP
+</div>
 
 </nav>
-
 </header>
 
 
+<!-- ================= HOME ================= -->
 
-<!-- =========================
-     EFFECTS
-========================= -->
+<section id="home">
 
-<div class="light"></div>
+<div class="hero">
+
+<div class="hero-text reveal">
+
+<div class="eyebrow">
+WEB DESIGN • DEVELOPMENT • BRAND
+</div>
+
+<h1>
+האתר שיגרום ללקוחות
+<br>
+<span>
+לבחור דווקא בעסק שלך.
+</span>
+</h1>
+
+<div class="divider"></div>
+
+<p>
+דפי נחיתה ואתרים מעוצבים,
+מקצועיים ומדויקים שמביאים תוצאות,
+בונים אמון ומייצרים לקוחות.
+</p>
+
+<div class="buttons">
+
+<a
+href="#contact"
+class="btn gold"
+>
+בואו נבנה לכם אתר ✦
+</a>
+
+<a
+href="#services"
+class="btn"
+>
+לצפייה בעבודות שלנו ↓
+</a>
+
+</div>
+
+</div>
+
+
+<div class="hero-logo reveal">
+
+<div class="big-sp">
+SP
+</div>
+
+<div class="laptop">
+
+<div class="apple">
+●
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= SERVICES ================= -->
+
+<section id="services">
+
+<div style="width:100%">
+
+<h2 class="section-title reveal">
+השירותים שלי
+</h2>
+
+<div class="divider"></div>
+
+<div class="cards">
+
+<div class="card reveal">
+
+<div class="icon">
+🚀
+</div>
+
+<h3>
+דף נחיתה
+</h3>
+
+<p>
+דף נחיתה ממוקד שמוביל
+את הגולש לפעולה ברורה,
+להשאיר פרטים ולקנות.
+</p>
+
+<div class="number">
+01
+</div>
+
+</div>
+
+
+<div class="card reveal">
+
+<div class="icon">
+▣
+</div>
+
+<h3>
+אתר תדמית
+</h3>
+
+<p>
+אתר תדמית מקצועי שמציג
+את העסק שלך בצורה הטובה
+ביותר ברשת.
+</p>
+
+<div class="number">
+02
+</div>
+
+</div>
+
+
+<div class="card reveal">
+
+<div class="icon">
+✎
+</div>
+
+<h3>
+עיצוב אישי
+</h3>
+
+<p>
+עיצוב ייחודי ומדויק למותג שלך,
+עם דגש על חוויית משתמש
+וקונספט יוקרתי.
+</p>
+
+<div class="number">
+03
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= PROCESS ================= -->
+
+<section id="process">
+
+<div style="width:100%">
+
+<h2 class="section-title reveal">
+תהליך העבודה
+</h2>
+
+<div class="divider"></div>
+
+<div class="process">
+
+<div class="step reveal">
+
+<div class="step-icon">
+♧
+</div>
+
+<div class="step-number">
+01
+</div>
+
+<h3>
+מכירים
+</h3>
+
+<p>
+מכירים את העסק,
+הקהל והצרכים שלך.
+</p>
+
+</div>
+
+
+<div class="step reveal">
+
+<div class="step-icon">
+✎
+</div>
+
+<div class="step-number">
+02
+</div>
+
+<h3>
+מתכננים
+</h3>
+
+<p>
+יוצרים אסטרטגיה,
+מבנה ותוכן מדויק לאתר.
+</p>
+
+</div>
+
+
+<div class="step reveal">
+
+<div class="step-icon">
+&lt;/&gt;
+</div>
+
+<div class="step-number">
+03
+</div>
+
+<h3>
+מעצבים ובונים
+</h3>
+
+<p>
+מעצבים את חוויית המשתמש
+ובונים אתר מהיר ומדויק.
+</p>
+
+</div>
+
+
+<div class="step reveal">
+
+<div class="step-icon">
+🚀
+</div>
+
+<div class="step-number">
+04
+</div>
+
+<h3>
+משיקים
+</h3>
+
+<p>
+עולים לאוויר ומשאירים
+את העסק שלך קדימה.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= ABOUT ================= -->
+
+<section id="about">
+
+<div style="width:100%;text-align:center">
+
+<h2 class="section-title reveal">
+אודות
+</h2>
+
+<div class="divider"></div>
 
 <div
-class="star"
+class="reveal"
 style="
-top:15%;
-left:8%;
+max-width:700px;
+margin:auto;
+font-size:20px;
+line-height:2;
+color:#c8c1b8;
 "
-></div>
-
-<div
-class="star"
-style="
-top:35%;
-left:91%;
-animation-delay:1s;
-"
-></div>
-
-<div
-class="star"
-style="
-top:58%;
-left:13%;
-animation-delay:1.7s;
-"
-></div>
-
-<div
-class="star"
-style="
-top:82%;
-left:84%;
-animation-delay:.6s;
-"
-></div>
-
-
-
-<!-- =========================
-     WEBSITE
-========================= -->
-
-<main>
-
-
-<!-- =========================
-     HOME
-========================= -->
-
-<section
-id="home"
 >
 
-<img
-src="home.jpg"
-class="section-image"
-alt="STAV PUZIN — ראשי"
->
+סטודיו STAV PUZIN מתמחה ביצירת
+אתרים ודפי נחיתה בעלי נראות יוקרתית,
+חוויית משתמש מדויקת ונוכחות דיגיטלית
+שמתאימה למותג שלך.
+
+</div>
+
+</div>
 
 </section>
 
 
 
-<!-- =========================
-     SERVICES
-========================= -->
+<!-- ================= CONTACT ================= -->
 
-<section
-id="services"
+<section id="contact">
+
+<div style="width:100%">
+
+<div class="contact-box reveal">
+
+<div class="contact-text">
+
+<h2>
+בואי נדבר
+</h2>
+
+<p>
+יש לך רעיון? בואי נבנה אותו.<br>
+אני כאן כדי לעזור לך להפוך רעיון
+לנוכחות דיגיטלית שמביאה תוצאות.
+</p>
+
+</div>
+
+
+<div class="contact-grid">
+
+
+<a
+class="contact-card"
+href="tel:0549815445"
 >
 
-<img
-src="services.jpg"
-class="section-image"
-alt="השירותים שלי"
+<div class="contact-icon">
+⌕
+</div>
+
+<strong>
+0549815445
+</strong>
+
+<span>
+→ להתקשר
+</span>
+
+</a>
+
+
+<a
+class="contact-card"
+href="mailto:Stavpuzin@gmail.com"
 >
+
+<div class="contact-icon">
+✉
+</div>
+
+<strong>
+Stavpuzin@gmail.com
+</strong>
+
+<span>
+→ לשליחת מייל
+</span>
+
+</a>
+
+
+<a
+class="contact-card"
+href="https://www.facebook.com/share/1B2YhJr8SM/?mibextid=wwXIfr"
+target="_blank"
+>
+
+<div class="contact-icon">
+f
+</div>
+
+<strong>
+Facebook
+</strong>
+
+<span>
+→ לעמוד בפייסבוק
+</span>
+
+</a>
+
+
+</div>
+
+</div>
+
+
+<footer class="reveal">
+
+<div class="footer-sp">
+SP
+</div>
+
+<div class="footer-name">
+STAV PUZIN
+</div>
+
+<div class="footer-sub">
+WEB DESIGN STUDIO
+</div>
+
+</footer>
+
+</div>
 
 </section>
 
 
-
-<!-- =========================
-     PROCESS
-========================= -->
-
-<section
-id="process"
->
-
-<img
-src="process.jpg"
-class="section-image"
-alt="תהליך העבודה"
->
-
-</section>
-
-
-
-<!-- =========================
-     ABOUT
-========================= -->
-
-<section
-id="about"
->
-
-<img
-src="about.jpg"
-class="section-image"
-alt="אודות"
->
-
-</section>
-
-
-
-<!-- =========================
-     CONTACT
-========================= -->
-
-<section
-id="contact"
->
-
-<img
-src="contact.jpg"
-class="section-image"
-alt="יצירת קשר"
->
-
-</section>
-
-
-</main>
-
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
 
 <script>
 
-/* =========================
-   ACTIVE MENU
-========================= */
-
-const links =
-[
-  ...document.querySelectorAll(
-    "nav a"
-  )
-];
-
-
-const sections =
-[
-  ...document.querySelectorAll(
-    "main section"
-  )
-];
-
+const elements =
+document.querySelectorAll(".reveal");
 
 const observer =
 new IntersectionObserver(
 
-  entries => {
+(entries)=>{
 
-    entries.forEach(
-      entry => {
+entries.forEach(
+(entry)=>{
 
-        if(
-          entry.isIntersecting
-        ){
+if(entry.isIntersecting){
 
-          links.forEach(
-            link => {
+entry.target.classList.add("show");
 
-              link.classList.toggle(
+}
 
-                "active",
-
-                link.getAttribute(
-                  "href"
-                )
-                ===
-                "#"
-                +
-                entry.target.id
-
-              );
-
-            }
-
-          );
-
-        }
-
-      }
-
-  },
-
-  {
-    threshold:.45
-  }
-
+}
 );
 
+},
+{
+threshold:.12
+}
+);
+
+elements.forEach(
+element =>
+observer.observe(element)
+);
+
+
+/* active navigation */
+
+const sections =
+document.querySelectorAll("section");
+
+const links =
+document.querySelectorAll("nav a");
+
+const navObserver =
+new IntersectionObserver(
+
+(entries)=>{
+
+entries.forEach(
+(entry)=>{
+
+if(entry.isIntersecting){
+
+links.forEach(
+(link)=>{
+
+link.classList.remove("active");
+
+if(
+link.getAttribute("href")
+===
+"#"+entry.target.id
+){
+
+link.classList.add("active");
+
+}
+
+}
+);
+
+}
+
+}
+);
+
+},
+{
+threshold:.45
+}
+);
 
 sections.forEach(
-  section =>
-    observer.observe(section)
-);
-
-
-/* =========================
-   PAGE LOAD
-========================= */
-
-window.addEventListener(
-  "load",
-  () => {
-
-    document.body.style.opacity =
-      "0";
-
-    requestAnimationFrame(
-      () => {
-
-        document.body.style.transition =
-          "opacity .7s ease";
-
-        document.body.style.opacity =
-          "1";
-
-      }
-    );
-
-  }
+section =>
+navObserver.observe(section)
 );
 
 </script>
-
 
 </body>
 </html>
